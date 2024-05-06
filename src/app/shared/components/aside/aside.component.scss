@@ -1,0 +1,39 @@
+.aside {
+  margin: 20px 15px;
+  height: calc(100% - 40px);
+  overflow-y: auto;
+
+  .caret {
+    cursor: pointer;
+    user-select: none; /* Prevent text selection */
+  }
+
+  /* Create the caret/arrow with a unicode, and style it */
+  .caret::before {
+    // content: "\25B6";
+    content: "\003e";
+    transform: rotate(90deg);
+    color: black;
+    display: inline-block;
+    margin-right: 6px;
+    margin-bottom: 10px;
+  }
+
+  /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+  .caret-down::before {
+    transform: rotate(0deg);
+  }
+
+  /* Hide the nested list */
+  .nested {
+    display: none;
+  }
+
+  /* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+  .active {
+    display: block;
+    margin-left: 20px;
+    margin-bottom: 10px;
+  }
+
+}

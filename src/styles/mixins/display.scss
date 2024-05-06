@@ -1,0 +1,15 @@
+@import 'src/styles/constants/index';
+
+@mixin displayRowFlexCenter($direction: row) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin displayColumnFlexCenter($direction: column) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,171 @@
+@import '../../../../styles/constants';
+
+.login {
+  width: $login-component-width;
+  margin: 30px auto;
+  background-color: $white;
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 25%);
+
+  &__logo {
+    margin-bottom: 34px;
+    display: inline-flex;
+    align-items: first baseline;
+    background-color: $blue500;
+    cursor: pointer;
+
+    &-img {
+      display: block;
+      width: 44px;
+      height: 44px;
+    }
+
+    &-text {
+      font-family: Baskerville, sans-serif;
+      letter-spacing: 0.04em;
+      font-size: $font-large3;
+      line-height: $line-height28;
+      text-transform: uppercase;
+      color: $white;
+      padding-right: 5px;
+    }
+  }
+
+  &__content {
+    padding: 0 42px 55px;
+    position: relative;
+  }
+
+  &__title {
+    font-size: $font-large1;
+    line-height: $line-height125P;
+    font-weight: $font-weight-700;
+    margin-bottom: 25px;
+    color: $grey900;
+  }
+
+  &__forgot {
+    display: flex;
+    justify-content: flex-end;
+    margin: -6px 0 18px;
+
+    a {
+      color: $grey600;
+      text-decoration: none;
+      font-size: $font-normal;
+      line-height: $line-height22;
+    }
+  }
+
+  &__btn {
+    width: 100%;
+    padding: 17px 0;
+    border-radius: 3px;
+    font-size: $font-large;
+    line-height: $line-height22;
+    color: $white;
+    background-color: $blue500;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 25%);
+    cursor: pointer;
+
+    &:hover {
+      background-color: $blue400;
+    }
+
+    &:active {
+      background-color: $blue300;
+    }
+
+    &:disabled, &:disabled:hover {
+      background-color: $grey300;
+      color: $white;
+      cursor: not-allowed;
+    }
+  }
+
+  &__close {
+    width: 22.5px;
+    height: 22.5px;
+    top: -20px;
+    right: 10px;
+    position: absolute;
+    border-radius: 50%;
+    background-color: $grey600;
+    transition: 0.2s ease-in-out;
+
+    .line {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 13px;
+      height: 1.5px;
+      background-color: $white;
+      transform: translate(-50%, -50%) rotate(45deg);
+
+      &:nth-child(2) {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+    }
+
+    &:hover {
+      transform: rotate(45deg);
+    }
+  }
+
+  .loginBlock {
+    position: relative;
+    margin-bottom: 18px;
+
+    &__label {
+      display: block;
+      color: $grey600;
+      font-size: $font-normal;
+      line-height: $line-height22;
+      margin-bottom: 8px;
+    }
+
+    &__input {
+      width: 100%;
+      display: block;
+      padding: 10px;
+      color: $grey900;
+      font-family: $Inter;
+      font-size: $font-medium;
+      background-color: $white;
+      border-radius: 3px;
+      border: 1px solid $grey400;
+
+      &:focus {
+        outline: none;
+        border: 1px solid $grey600;
+      }
+
+      &::placeholder {
+        color: $grey700;
+      }
+
+      &.invalidInput {
+        border: 1px solid $red500;
+      }
+    }
+
+    .eye {
+      top: 42px;
+      right: 15px;
+      position: absolute;
+      cursor: pointer;
+    }
+
+    .error-message {
+      position: absolute;
+      bottom: -15px;
+      color: $red500;
+      font-size: $font-small;
+    }
+  }
+}
+
+.errorMessage {
+  color: $red500;
+  font-size: $font-small;
+  padding-bottom: 10px;
+}

@@ -1,0 +1,12 @@
+<div class="note" *ngIf="(note$ | async) as note">
+  <div class="note__date">
+    {{ note.dateCreated | date : "MMM dd, yyyy 'at' HH:mm" }}
+  </div>
+  <h2 class="note__title">{{ note.title }}</h2>
+  <div class="note__content">{{ note.content }}</div>
+
+  <div class="note__content">{{note | json}}</div>
+
+  <button class="note__edit">Edit</button>
+  <button class="note__delete">Delete</button>
+</div>

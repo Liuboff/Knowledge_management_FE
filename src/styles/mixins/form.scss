@@ -1,0 +1,8 @@
+@import 'src/styles/constants/index';
+
+@mixin contact-form-styles {
+  padding: 10px;
+  border: 1px solid $grey500;
+  font-size: $font-medium-plus;
+  line-height: $line-height36;
+}

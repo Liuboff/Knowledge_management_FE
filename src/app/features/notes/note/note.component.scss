@@ -1,0 +1,50 @@
+.note {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px #ccc;
+
+  &__title {
+    color: #090090;
+    margin-bottom: 15px;
+  }
+
+  &__content {
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+  }
+
+  &__date {
+    font-weight: 12px;
+    color: #ccc;
+    text-align: end;
+    margin-bottom: 10px;
+  }
+
+  button {
+    padding: 10px 25px;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 5px;
+    width: 120px;
+  }
+
+  button:hover {
+    box-shadow: 0px 0px 5px 3px #ccc;
+  }
+
+  button + button {
+    margin-left: 10px;
+  }
+
+  &__edit {
+    background-color: #fa9632;
+  }
+
+  &__delete {
+    background-color: brown;
+  }
+}

@@ -1,0 +1,54 @@
+<div class="aside">
+  <ul class="aside__list">
+
+    <li><span class="caret">
+      <a href="#">Company</a></span>
+    </li>
+    <li><span class="caret">
+      <a href="#">People?</a></span>
+    </li>
+
+    <li><span class="caret">Projects</span>
+      <ul class="nested">
+        <li *ngFor="let project of projects">
+          <span class="caret" (click)="toggleNested($event)">{{project.name}}</span>
+          <ul class="nested">
+            <li *ngFor="let link of project.links"><a href="#">{{link}}</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="caret">Notes</span>
+      <ul class="nested">
+        <li><span class="caret">
+          <a routerLink="notes/create">Create new</a></span>
+        </li>
+        <li *ngFor="let note of notes">
+          <span class="caret" (click)="toggleNested($event)">{{note.name}}</span>
+          <ul class="nested">
+            <li *ngFor="let link of note.links"><a href="#">{{link}}</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li><span class="caret">
+      <a href="#">Announcements</a></span>
+    </li>
+
+    <li><span class="caret">
+      <a href="#">Calendar</a></span>
+    </li>
+
+    <li><span class="caret">
+      <a href="#">Learning</a></span>
+    </li>
+
+    <li><span class="caret">
+      <a href="#">Onboarding</a></span>
+    </li>
+    <li><span class="caret">
+      <a href="#">Helthcare</a></span>
+    </li>
+  </ul>
+</div>

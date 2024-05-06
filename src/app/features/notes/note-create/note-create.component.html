@@ -1,0 +1,48 @@
+<div class="create">
+  <h1 class="create__title">Creation of note</h1>
+  <form [formGroup]="noteForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="title">Назва нотатки:</label>
+      <input
+        type="text"
+        formControlName="title"
+        id="title"
+        class="form-control"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="content">Текст нотатки:</label>
+      <editor formControlName="content" id="content" apiKey="x2kj148c3unh8b6qvj3uwk2poqwxozayxnc7mw5nif072vlq" [init]="{plugins: 'link'}"></editor>
+    </div>
+
+    <div class="form-group">
+      <label for="image">Зображення:</label>
+      <input
+        type="file"
+        formControlName="image"
+        id="image"
+        class="form-control"
+      />
+    </div>
+    <div class="form-group">
+      <label for="tags">Теги:</label>
+      <input type="text" formControlName="tags" id="tags" class="form-control" />
+    </div>
+    <div class="form-group">
+      <label for="category">Категорія:</label>
+      <select formControlName="category" id="category" class="form-control">
+        <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="project">Project:</label>
+      <select formControlName="project" id="project" class="form-control">
+        <option *ngFor="let project of projects" [value]="project.id">{{project.name}}</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Створити нотатку</button>
+  </form>
+</div>
+

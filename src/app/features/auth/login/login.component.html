@@ -1,0 +1,85 @@
+<div class="login">
+  <div class="login__logo" routerLink="catalog">
+    <!-- <img class="login__logo-img" src="assets/header-icons/logo-icon.png" alt="logo" /> -->
+    <div class="login__logo-text">KM</div>
+  </div>
+  <div class="login__content">
+    <h1 class="login__title">{{ "Log In" | titlecase }}</h1>
+    <form class="login__form" [formGroup]="loginForm" (ngSubmit)="onLogin()">
+
+      <div class="login__block loginBlock">
+        <label for="email" class="loginBlock__label">Phone number or Email</label>
+        <input
+          type="text"
+          name="email"
+          id="email"
+          class="loginBlock__input"
+          formControlName="email"
+          [ngClass]="{
+            invalidInput:
+              loginForm.get('email')?.invalid &&
+              (loginForm.get('email')?.dirty || loginForm.get('email')?.touched)
+          }"
+          placeholder="name@example.com"
+        />
+        <div *ngIf="email?.invalid && (email?.touched || email?.dirty)" class="error-message">
+          <div *ngIf="email?.errors?.['required']">Phone number or Email is required</div>
+          <div *ngIf="email?.errors?.['minlength']">Phone number or Email must be at least 5 characters long</div>
+          <div *ngIf="email?.errors?.['pattern']
+            && !email?.errors?.['minlength']
+            && !email?.errors?.['maxlength']">Input must contain only email or numbers and +</div>
+          <div *ngIf="email?.errors?.['maxlength']">Phone must be no more than 20 characters</div>
+        </div>
+      </div>
+
+      <div class="login__block loginBlock">
+        <label for="password" class="loginBlock__label">Password</label>
+        <input
+          type="{{ showPassword ? 'text' : 'password' }}"
+          name="password"
+          id="password"
+          class="loginBlock__input"
+          formControlName="password"
+          [ngClass]="{
+            invalidInput:
+              loginForm.get('password')?.invalid &&
+              (loginForm.get('password')?.dirty || loginForm.get('password')?.touched)
+          }"
+        />
+        <img
+          [src]="showPassword ? '../../../../assets/password-icons/show-icon.png':'../../../../assets/password-icons/hide-icon.png'"
+          (click)="toggleShowPassword()"
+          class="eye"
+        />
+
+        <div *ngIf="password?.invalid && (password?.touched || password?.dirty)" class="error-message">
+          <div *ngIf="password?.errors?.['required']">Password is required</div>
+          <div *ngIf="password?.errors?.['minlength']">Password must be at least 8 characters long</div>
+          <div *ngIf="password?.errors?.['pattern']
+            && !password?.errors?.['minlength']
+            && !password?.errors?.['maxlength']">Password must contain a letter, a number and a special character &,#,!,%</div>
+          <div *ngIf="password?.errors?.['maxlength']">Password must be no more than 255 characters</div>
+        </div>
+      </div>
+
+      <div class="login__forgot">
+        <a routerLink="/auth/register">Don't have an account? Register!</a>
+      </div>
+
+      <button class="login__close" (click)="onClose()">
+        <div class="btn__inner">
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+      </button>
+
+      <div class="errorMessage">
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+      </div>
+
+      <button type="submit" class="login__btn" [disabled]="!loginForm.valid">
+        Log in
+      </button>
+    </form>
+  </div>
+</div>

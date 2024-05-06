@@ -1,0 +1,159 @@
+<div class="container">
+  <div class="form__wrapper">
+    <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()" appTabDirective>
+      <div class="form__header">
+        <div class="header__logo">
+          <img class="header__logo-img" src="assets/logo.png" alt="logo"/>
+          <div class="header__logo-text">KM</div>
+        </div>
+      </div>
+      <div class="form__body">
+        <h2 class="form__title">{{ getTitle() | titlecase }}</h2>
+        <div class="form__group">
+          <label for="firstName" class="form__label">First name</label>
+          <input type="text" id="firstName" class="form__input" formControlName="firstName" placeholder="John"
+                 name="firstName"
+                 [ngClass]="{ 'error': firstName.invalid && (firstName.touched || firstName.dirty)}">
+
+          <div *ngIf="firstName?.invalid && (firstName?.touched || firstName?.dirty)" class="error-message">
+            <div *ngIf="firstName?.errors?.['required']">First name is required</div>
+            <div *ngIf="firstName?.errors?.['pattern'] && !firstName?.errors?.['maxlength']">First name must contain only letters</div>
+            <div *ngIf="firstName?.errors?.['maxlength']">First name must be no more than 255 characters</div>
+          </div>
+        </div>
+
+        <div class="form__group">
+          <label for="lastName" class="form__label">Last name</label>
+          <input type="text" id="lastName" class="form__input" formControlName="lastName" placeholder="Doe"
+                 name="lastName"
+                 [ngClass]="{ 'error': lastName.invalid && (lastName.touched || lastName.dirty)}">
+
+          <div *ngIf="lastName?.invalid && (lastName?.touched || lastName?.dirty)" class="error-message">
+            <div *ngIf="lastName?.errors?.['required']">Last name is required</div>
+            <div *ngIf="lastName?.errors?.['pattern'] && !lastName?.errors?.['maxlength']">Last name must contain only letters</div>
+            <div *ngIf="lastName?.errors?.['maxlength']">Last name must be no more than 255 characters</div>
+          </div>
+        </div>
+
+        <div class="form__group">
+          <label for="email" class="form__label">Email</label>
+          <input type="email" id="email" class="form__input" formControlName="email" placeholder="name@example.com"
+                 name="email"
+                 [ngClass]="{ 'error': email.invalid && (email.touched || email.dirty)}">
+
+          <div *ngIf="email?.invalid && (email?.touched || email?.dirty)" class="error-message">
+            <div *ngIf="email?.errors?.['required']">Email is required</div>
+            <div *ngIf="email?.errors?.['pattern'] || email?.errors?.['email']">Email is invalid</div>
+          </div>
+        </div>
+
+        <div class="form__group">
+          <label for="phone" class="form__label">Telephone</label>
+          <input type="text" id="phone" class="form__input" formControlName="phone" placeholder="+" name="phone"
+                 [ngClass]="{ 'error': phone.invalid && (phone.touched || phone.dirty)}">
+
+          <div *ngIf="phone?.invalid && (phone?.touched || phone?.dirty)" class="error-message">
+            <div *ngIf="phone?.errors?.['required']">Phone is required</div>
+            <div *ngIf="phone?.errors?.['minlength']">Phone must be at least 6 characters long</div>
+            <div *ngIf="phone?.errors?.['pattern']
+              && !phone?.errors?.['minlength']
+              && !phone?.errors?.['maxlength']">Phone must contain only numbers and +</div>
+            <div *ngIf="phone?.errors?.['maxlength']">Phone must be no more than 20 characters</div>
+          </div>
+        </div>
+
+        <div class="form__group">
+          <label for="country" class="form__label">Country</label>
+          <input type="text" id="country" class="form__input" formControlName="country" placeholder="Ukraine"
+                 name="country"
+                 [ngClass]="{ 'error': country.invalid && (country.touched || country.dirty)}">
+
+          <div *ngIf="country?.invalid && (country?.touched || country?.dirty)" class="error-message">
+            <div *ngIf="country?.errors?.['required']">Country is required</div>
+            <div *ngIf="country?.errors?.['pattern'] && !country?.errors?.['maxlength']">Country must contain only letters</div>
+            <div *ngIf="country?.errors?.['maxlength']">Country must be no more than 255 characters</div>
+          </div>
+        </div>
+
+        <div class="form__group">
+          <label for="city" class="form__label">City</label>
+          <input type="text" id="city" class="form__input" formControlName="city" placeholder="Kyiv"
+                 name="city"
+                 [ngClass]="{ 'error': city.invalid && (city.touched || city.dirty)}">
+
+          <div *ngIf="city?.invalid && (city?.touched || city?.dirty)" class="error-message">
+            <div *ngIf="city?.errors?.['required']">City name is required</div>
+            <div *ngIf="city?.errors?.['pattern'] && !city?.errors?.['maxlength']">City must contain only letters</div>
+            <div *ngIf="city?.errors?.['maxlength']">City must be no more than 255 characters</div>
+          </div>
+        </div>
+
+        <div class="form__group">
+          <label for="isAdmin" class="form__label">Are you admin?</label>
+          <input type="checkbox" id="isAdmin" class="form__checkbox" formControlName="isAdmin" name="isAdmin">
+        </div>
+
+        <div class="form__group">
+          <label for="password" class="form__label">Password</label>
+          <div class="input-wrapper input-wrapper-password">
+            <input id="password" class="form__input" formControlName="password" name="password"
+                   [type]="showPassword ? 'text' : 'password'"
+                   [ngClass]="{ 'error': password.invalid && (password.touched || password.dirty)}"
+            >
+            <div class="toggle-password" (click)="toggleShowPassword()">
+              <img [src]="showPassword ? '../../../../assets/password-icons/show-icon.png' : '../../../../assets/password-icons/hide-icon.png'"
+                   alt="show/hide password"/>
+            </div>
+          </div>
+          <div *ngIf="password?.invalid && (password?.touched || password?.dirty)" class="error-message">
+            <div *ngIf="password?.errors?.['required']">Password is required</div>
+            <div *ngIf="password?.errors?.['minlength']">Password must be at least 8 characters long</div>
+            <div *ngIf="password?.errors?.['pattern']
+              && !password?.errors?.['minlength']
+              && !password?.errors?.['maxlength']">Password must contain a letter, a number and a special character &,#,!,%</div>
+            <div *ngIf="password?.errors?.['maxlength']">Password must be no more than 255 characters</div>
+          </div>
+        </div>
+
+        <div class="form__group">
+          <label for="confirmPassword" class="form__label">Password Confirmation</label>
+          <div class="input-wrapper input-wrapper-password">
+            <input id="confirmPassword" class="form__input" formControlName="confirmPassword"
+                   name="confirmPassword"
+                   [type]="showConfirmPassword ? 'text' : 'password'"
+                   [ngClass]="{ 'error': confirmPassword.invalid && (confirmPassword.touched || confirmPassword.dirty)}"
+            >
+            <div class="toggle-password" (click)="toggleShowConfirmPassword()">
+              <img
+                [src]="showConfirmPassword ? 'assets/password-icons/show-icon.png' : 'assets/password-icons/hide-icon.png'"
+                alt="show/hide password"/>
+            </div>
+          </div>
+          <div *ngIf="confirmPassword?.invalid && (confirmPassword?.touched || confirmPassword?.dirty)"
+               class="error-message">
+            <div *ngIf="confirmPassword?.errors?.['required']">Password confirmation is required</div>
+            <div *ngIf="confirmPassword?.errors?.['passwordMismatch']">Passwords do not match</div>
+          </div>
+        </div>
+
+        <div class="form__group">
+          <div class="form__error-message">
+            <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+          </div>
+        </div>
+
+        <div class="form__group">
+          <button type="submit" class="form__button" [disabled]="form.invalid || form.pristine">{{ getButtonText() }}</button>
+        </div>
+      </div>
+
+      <button class="form__close" (click)="onClose()">
+        <div class="btn__inner">
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+      </button>
+
+    </form>
+  </div>
+</div>

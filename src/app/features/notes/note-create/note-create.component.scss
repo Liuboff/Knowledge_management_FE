@@ -1,0 +1,44 @@
+.create {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: rgba(223, 233, 243, 0.5);
+  // background-color:rgba(240, 255, 255, 0.5); //color - azure
+
+  &__title {
+    text-align: center;
+    font-weight: 500;
+    color: #090090;
+  }
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.btn-primary {
+  color: #fff;
+  font-size: 14px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  background-color: #090090;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+

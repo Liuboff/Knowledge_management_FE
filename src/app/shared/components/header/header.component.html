@@ -1,0 +1,14 @@
+<header class="header container">
+  <div class="header__logo">
+    <a routerLink="" routerLinkActive="router-link-active" >KM</a></div>
+  <div class="header__search">
+    <form>
+      <input type="search" placeholder="Search...">
+      <button type="submit"></button>
+    </form>
+  </div>
+  <div class="header__auth">
+    <a routerLink="auth/login" class="header__login" *ngIf="!isLoggedIn">Login</a>
+    <a (click)="onLogout()" class="header__login" *ngIf="isLoggedIn">Logout</a>
+  </div>
+</header>

@@ -1,0 +1,110 @@
+// Width
+$width-min: 0;
+$width-xs: 320px;
+$width-s: 480px;
+$width-md: 768px;
+$width-lg: 1024px;
+$width-lg-1: 1200px;
+$width-lg-2: 1400px;
+$width-xlg: 1920px;
+
+// Common
+$grid-breakpoints: (
+  min: $width-min,
+  xs: $width-xs,
+  s: $width-s,
+  md: $width-md,
+  lg: $width-lg,
+  lg1: $width-lg-1,
+  lg2: $width-lg-2,
+  xlg: $width-xlg,
+);
+
+// Base fonts
+$Inter: Inter, 'Arial', sans-serif;
+$InterMedium: InterMedium, 'Arial', sans-serif;
+$InterBold: InterBold, 'Arial', sans-serif;
+$Baskerville: Baskerville, 'Arial', sans-serif;
+
+
+// Font sizes
+$font-none: 0;
+$font-micro: 10px;
+$font-small: 12px;
+$font-normal: 14px;
+$font-medium: 16px;
+$font-medium-plus: 18px;
+$font-big: 20px;
+$font-large: 24px;
+$font-large0: 30px;
+$font-large1: 32px;
+$font-large2: 36px;
+$font-large3: 40px;
+$font-large4: 48px;
+$font-large5: 53px;
+$font-large6: 66px;
+
+// font-weight
+
+$font-weight-normal: normal;
+$font-weight-bold: bold;
+
+/* Numeric keyword values */
+$font-weight-100: 100;
+$font-weight-200: 200;
+$font-weight-300: 300;
+$font-weight-400: 400; /* normal */
+$font-weight-500: 500;
+$font-weight-600: 600; /* semibold */
+$font-weight-700: 700; /* bold */
+$font-weight-800: 800;
+$font-weight-900: 900;
+
+
+//gap
+$min-gap6: 6px;
+$min-gap: 8px;
+$min-gap10: 10px;
+$min-gap12: 12px;
+$medium-gap: 16px;
+$medium-gap20: 20px;
+$max-gap: 24px;
+$max-gap2: 28px;
+$max-gap3: 32px;
+$max-gap4: 48px;
+
+//line-height
+$line-height16: 16px;
+$line-height18: 18px;
+$line-height20: 20px;
+$line-height22: 22px;
+$line-height24: 24px;
+$line-height28: 28px;
+$line-height36: 36px;
+$line-height48: 48px;
+$line-height50: 50px;
+$line-height100P: 100%;
+$line-height125P: 125%;
+
+$site-content-container-width: 1156px;
+$outer-wrapper-width: 1440px;
+$login-component-width: 500px;
+
+$checkout-component-margin-max: 112px;
+$checkout-form-input-width: 413px;
+$checkout-form-input-height: 42px;
+$checkout-input-wide-column: 255px;
+$checkout-input-narrow-column: 138px;
+$checkout-cart-item-width: 284px;
+
+//feedback form
+$feedback-form-width: 454px;
+$feedback-form-input-height: 48px;
+$feedback-form-textarea-height: 272px;
+$feedback-form-error-message-font-size: 12px;
+$feedback-form-submit-height: 60px;
+$feedback-form-submit-border-radius: 40px;
+
+//map
+$map-width: 625px;
+$map-height: 707px;

@@ -1,0 +1,156 @@
+@import 'src/styles/constants/index';
+
+// WARN! for each button with plus svg you need to add aling-items: flex-end;
+
+@mixin buttonColor($bg, $color) {
+  background-color: $bg;
+  color: $color;
+  fill: $color;
+}
+
+// must add for each button
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $min-gap;
+  padding: 10px 22px;
+  font-family: $InterMedium;
+  font-size: $font-medium;
+  line-height: $line-height125P;
+  border-radius: 4px;
+  height: 44px;
+}
+
+// button with fill color
+
+.button-fill {
+  @include buttonColor($magenta500, $white);
+
+  &:hover {
+    @include buttonColor($magenta300, $white);
+  }
+
+  &:active {
+    @include buttonColor($magenta400, $white);
+  }
+}
+
+._fill-disable {
+  &,
+  &:hover,
+  &:active {
+    cursor: auto;
+    @include buttonColor($grey300, $white);
+  }
+}
+
+// button with border
+// might be used for link button with border
+
+.button-bord {
+  @include buttonColor($white, $magenta500);
+  border: 1px solid $magenta500;
+  text-decoration: none;
+
+  &:hover {
+    @include buttonColor($magenta050, $magenta300);
+    border: 1px solid $magenta300;
+  }
+
+  &:active {
+    @include buttonColor($white, $magenta400);
+    border: 1px solid $magenta400;
+  }
+}
+
+._bord-disable {
+  &,
+  &:hover,
+  &:active {
+    cursor: auto;
+    @include buttonColor($white, $grey400);
+    border: 1px solid $grey400;
+  }
+}
+
+// button without border and fill color
+
+.button-nofill {
+  @include buttonColor($white, $blue500);
+
+  &:hover {
+    @include buttonColor($blue100, $blue400);
+  }
+
+  &:active {
+    @include buttonColor($white, $blue500);
+  }
+}
+
+._nofill-disable {
+  &,
+  &:hover,
+  &:active {
+    cursor: auto;
+    @include buttonColor($white, $grey400);
+  }
+}
+
+.plus-svg {
+  min-width: 24px;
+  min-height: 24px;
+}
+
+// LINKS
+
+.link {
+  font-family: $InterMedium;
+  color: $magenta500;
+  font-size: $font-medium;
+  line-height: $line-height20;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+
+  &:hover {
+    color: $magenta300;
+  }
+
+  &:active {
+    color: $magenta400;
+  }
+}
+
+.link-big {
+  font-size: $font-medium-plus;
+  line-height: $line-height24;
+  text-underline-offset: 4px;
+}
+
+._link-disable {
+  &,
+  &:hover,
+  &:active {
+    cursor: auto;
+    color: $grey500;
+    text-decoration: none;
+  }
+}
+
+.menu-link {
+  font-family: $InterBold;
+  padding: 20px 9px 1px;
+  font-size: $font-medium;
+  line-height: $line-height22;
+  color: $white;
+  text-transform: uppercase;
+  text-decoration: none;
+
+  &:hover {
+    color: $blue300;
+  }
+  &:active {
+    color: $white;
+  }
+}

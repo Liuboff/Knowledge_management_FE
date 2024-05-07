@@ -72,7 +72,7 @@ export class AsideComponent implements OnInit {
         }
         t.classList.toggle('caret-down');
       });
-      // this.cd.markForCheck();
+      this.cd.markForCheck();
     });
   }
 

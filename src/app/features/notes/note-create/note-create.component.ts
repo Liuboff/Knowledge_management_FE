@@ -20,6 +20,7 @@ export class NoteCreateComponent implements OnInit {
   currentUser!: User;
 
   currentUserId!: string;
+  currentUserProjectsId!: string[];
 
   categories!: Category[];
   projects!: Project[];
@@ -45,10 +46,9 @@ export class NoteCreateComponent implements OnInit {
     this.auth.getCurrentUser().subscribe((user) => {
       if (user) {
         this.currentUser = user;
-        console.log(this.currentUser);
-        console.log(user);
+        if (user.id) this.currentUserId = user.id;
+        if (user.projects) this.currentUserProjectsId = user.projects;
       }
-      console.log(this.currentUser.id);
     });
 
     this.notesServise.getCategories().subscribe((categories) => {
@@ -57,12 +57,7 @@ export class NoteCreateComponent implements OnInit {
       }
     });
 
-    console.log(this.currentUser);
-    console.log(this.currentUser.id);
-
-    this.projectsServise.getUserProjects('6627c36a366b475e7a6ab1c5').subscribe((projects) => {
-      // console.log(this.currentUser);
-      // console.log(this.currentUser.id);
+    this.projectsServise.getUserProjects(this.currentUserProjectsId).subscribe((projects) => {
       if (projects) {
         this.projects = projects;
       }

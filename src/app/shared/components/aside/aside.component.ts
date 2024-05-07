@@ -1,4 +1,9 @@
 import { Component, ElementRef, Renderer2, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Note } from '@shared/models/note.model';
+import { Project } from '@shared/models/project';
+import { AuthService } from '@shared/services/auth.service';
+import { NotesService } from '@shared/services/notes.service';
+import { ProjectsService } from '@shared/services/projects.service';
 
 @Component({
   selector: 'app-aside',
@@ -8,36 +13,55 @@ import { Component, ElementRef, Renderer2, OnInit, ChangeDetectionStrategy, Chan
 })
 export class AsideComponent implements OnInit {
 
-  constructor(private renderer: Renderer2, private el: ElementRef, private cd: ChangeDetectorRef) {}
+  constructor(
+    private renderer: Renderer2,
+    private el: ElementRef,
+    private cd: ChangeDetectorRef,
+    private notesServise: NotesService,
+    private projectsServise: ProjectsService,
+    private auth: AuthService
+  ) {}
 
-  projects: any = [];
-  notes: any = [];
-  // links = ['Notes', 'Ideas', 'Resources', 'Team'];
+  currentUserId!: string;
+  currentUserProjectsId!: string[];
+
+  projects: Project[] = [];
+  notes: Note[] = [];
 
   ngOnInit(): void {
-    this.projects = [
-      {
-        name: 'Project 5',
-        links: ['Notes', 'Ideas', 'Resources', 'Team']
-      },
-      {
-        name: 'Project 2',
-        links: ['Notes', 'Ideas', 'Resources', 'Team']
-      },
-    ];
+    // this.projects = [
+    //   {
+    //     name: 'Project 5',
+    //     links: ['Notes', 'Ideas', 'Resources', 'Team']
+    //   },
+    //   {
+    //     name: 'Project 2',
+    //     links: ['Notes', 'Ideas', 'Resources', 'Team']
+    //   },
+    // ];
 
-    this.notes = [
-      {
-        name: 'Note 1',
-        links: ['Notes', 'Ideas', 'Resources', 'Team']
-      },
-      {
-        name: 'Note 2',
-        links: ['Notes', 'Ideas', 'Resources', 'Team']
-      },
-    ];
+    this.auth.getCurrentUser().subscribe((user) => {
+      if (user) {
+        if (user.id) this.currentUserId = user.id;
+        if (user.projects) this.currentUserProjectsId = user.projects;
+      }
+    });
 
-    // this.cd.markForCheck();
+    this.projectsServise.getUserProjects(this.currentUserProjectsId).subscribe((projects) => {
+      if (projects) {
+        this.projects = projects;
+      }
+      this.cd.markForCheck();
+    });
+
+    this.notesServise.getNotes().subscribe((notes) => {
+      if (notes) {
+        this.notes = notes;
+      }
+      this.cd.markForCheck();
+    });
+
+    this.cd.markForCheck();
 
     const toggler = this.el.nativeElement.querySelectorAll('.caret');
     toggler.forEach((t: Element) => {

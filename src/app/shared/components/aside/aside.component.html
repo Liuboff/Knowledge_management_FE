@@ -13,21 +13,23 @@
         <li *ngFor="let project of projects">
           <span class="caret" (click)="toggleNested($event)">{{project.name}}</span>
           <ul class="nested">
-            <li *ngFor="let link of project.links"><a href="#">{{link}}</a></li>
+            <li><a href="#">{{project.team}}</a></li>
+            <li><a href="#">{{project.tasks}}</a></li>
           </ul>
         </li>
       </ul>
     </li>
+
     <li><span class="caret">Notes</span>
       <ul class="nested">
         <li><span class="caret">
           <a routerLink="notes/create">Create new</a></span>
         </li>
         <li *ngFor="let note of notes">
-          <span class="caret" (click)="toggleNested($event)">{{note.name}}</span>
-          <ul class="nested">
+          <span class="caret" (click)="toggleNested($event)" routerLink="/notes/{{note.id}}">{{note.title}}</span>
+          <!-- <ul class="nested">
             <li *ngFor="let link of note.links"><a href="#">{{link}}</a></li>
-          </ul>
+          </ul> -->
         </li>
       </ul>
     </li>

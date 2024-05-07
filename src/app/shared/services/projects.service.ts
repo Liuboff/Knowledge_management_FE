@@ -10,16 +10,24 @@ export class ProjectsService {
 
   constructor(private http: HttpClient) {}
 
-  getUserProjects(userId: string): Observable<Project[]> {
-    return this.http.get<Project[]>(`http://localhost:3000/api/v1/users/projects/${userId}`).pipe(
+  getUserProjects(projectsIds: string[]): Observable<Project[]> {
+    return this.http.post<Project[]>(`http://localhost:3000/api/v1/projects/userProjectsByIds`, projectsIds).pipe(
       map((response: Project[]) => {
-        console.error(response); //////////////////////////////////////////////////////////////////
         return response;
       }),
 
       catchError(this.handleError),
     );
   }
+  // getUserProjects(userId: string): Observable<Project[]> {
+  //   return this.http.get<Project[]>(`http://localhost:3000/api/v1/users/projects/${userId}`).pipe(
+  //     map((response: Project[]) => {
+  //       return response;
+  //     }),
+
+  //     catchError(this.handleError),
+  //   );
+  // }
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage: string = 'An unknown error occurred!';

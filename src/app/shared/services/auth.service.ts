@@ -44,16 +44,16 @@ export class AuthService {
 
   login(email: string, password: string): Observable<User> {
     let userData = { email, password };
-    return this.http.post<User>('http://localhost:3000/api/v1/users/login', userData).pipe(
-      map((response: User) => {
+    return this.http.post<{ user: User, token: string }>('http://localhost:3000/api/v1/users/login', userData).pipe(
+      map((response) => {
         if (response.token) {
-          localStorage.setItem('user', JSON.stringify(response));
+          localStorage.setItem('user', JSON.stringify(response.user));
           localStorage.setItem('token', response.token);
 
-          this.currentUserSubject.next(response);
+          this.currentUserSubject.next(response.user);
           this.autoLogout(response.token);
         }
-        return response;
+        return response.user;
       }),
 
       catchError(this.handleError),

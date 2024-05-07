@@ -1,6 +1,13 @@
-import { Component, ElementRef, Renderer2, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Renderer2,
+  OnInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { Note } from '@shared/models/note.model';
-import { Project } from '@shared/models/project';
+import { Project } from '@shared/models/project.model';
 import { AuthService } from '@shared/services/auth.service';
 import { NotesService } from '@shared/services/notes.service';
 import { ProjectsService } from '@shared/services/projects.service';
@@ -9,10 +16,9 @@ import { ProjectsService } from '@shared/services/projects.service';
   selector: 'app-aside',
   templateUrl: './aside.component.html',
   styleUrls: ['./aside.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AsideComponent implements OnInit {
-
   constructor(
     private renderer: Renderer2,
     private el: ElementRef,
@@ -23,7 +29,6 @@ export class AsideComponent implements OnInit {
   ) {}
 
   currentUserId!: string;
-
   projects: Project[] = [];
   notes: Note[] = [];
 
@@ -45,21 +50,21 @@ export class AsideComponent implements OnInit {
       }
     });
 
-    this.projectsServise.getUserProjects(this.currentUserId).subscribe((projects) => {
-      if (projects) {
-        this.projects = projects;
-      }
-      this.cd.markForCheck();
-    });
+    this.projectsServise
+      .getUserProjects(this.currentUserId)
+      .subscribe((projects) => {
+        if (projects) {
+          this.projects = projects;
+        }
+        this.cd.markForCheck();
+      });
 
-    this.notesServise.getNotes().subscribe((notes) => {
+    this.notesServise.getUserNotes(this.currentUserId).subscribe((notes) => {
       if (notes) {
         this.notes = notes;
       }
       this.cd.markForCheck();
     });
-
-    this.cd.markForCheck();
 
     const toggler = this.el.nativeElement.querySelectorAll('.caret');
     toggler.forEach((t: Element) => {
@@ -72,6 +77,7 @@ export class AsideComponent implements OnInit {
       });
       this.cd.markForCheck();
     });
+
   }
 
   toggleNested(event: MouseEvent): void {

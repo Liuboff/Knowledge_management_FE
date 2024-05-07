@@ -4,7 +4,7 @@ import { catchError, map, Observable, throwError } from 'rxjs';
 
 import { Note } from '@shared/models/note.model';
 import { Api } from '../models/api.model';
-import { Category } from '@shared/models/category';
+import { Category } from '@shared/models/category.model';
 
 @Injectable({
   providedIn: 'root',
@@ -33,11 +33,11 @@ export class NotesService {
   }
 
   getUserNotes(userId: string): Observable<Note[]> {
-    return this.http.get<Note[]>(`http://localhost:3000/api/v1/users/usernotes/${userId}`).pipe(
+    return this.http.get<Note[]>(`http://localhost:3000/api/v1/notes/usernotes/${userId}`).pipe(
       map((response: Note[]) => {
         return response;
       }),
-      
+
       catchError(this.handleError),
     );
   }

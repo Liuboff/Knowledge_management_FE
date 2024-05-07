@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { Category } from '@shared/models/category';
-import { Project } from '@shared/models/project';
+import { Category } from '@shared/models/category.model';
+import { Project } from '@shared/models/project.model';
 import { User } from '@shared/models/user.model';
 import { AuthService } from '@shared/services/auth.service';
 import { NotesService } from '@shared/services/notes.service';
@@ -19,7 +19,7 @@ export class NoteCreateComponent implements OnInit {
   errorMessage: string = '';
   currentUser!: User;
   currentUserId!: string;
-  
+
   categories!: Category[];
   projects!: Project[];
 
@@ -37,8 +37,8 @@ export class NoteCreateComponent implements OnInit {
       content: [''],
       image: [''],
       tags: [''],
-      category: [''],
-      project: [''],
+      categories: [[]],
+      project: [[]],
     });
 
     this.auth.getCurrentUser().subscribe((user) => {
@@ -63,9 +63,10 @@ export class NoteCreateComponent implements OnInit {
 
   onSubmit(): void {
     if (this.noteForm.valid) {
-      const projects = this.currentUser.projects;
+      const projects = this.projects;
       const tasks = this.currentUser.tasks;
-      const noteValue = { ...this.noteForm.value, ...this.projects, tasks };
+      const author = this.currentUserId;
+      const noteValue = { ...this.noteForm.value, projects, tasks, author };
 
       this.notesServise.createNote(noteValue).subscribe({
         next: () => {

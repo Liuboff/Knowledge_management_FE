@@ -18,10 +18,8 @@ export class NoteCreateComponent implements OnInit {
   noteForm!: FormGroup;
   errorMessage: string = '';
   currentUser!: User;
-
   currentUserId!: string;
-  currentUserProjectsId!: string[];
-
+  
   categories!: Category[];
   projects!: Project[];
 
@@ -47,7 +45,6 @@ export class NoteCreateComponent implements OnInit {
       if (user) {
         this.currentUser = user;
         if (user.id) this.currentUserId = user.id;
-        if (user.projects) this.currentUserProjectsId = user.projects;
       }
     });
 
@@ -57,7 +54,7 @@ export class NoteCreateComponent implements OnInit {
       }
     });
 
-    this.projectsServise.getUserProjects(this.currentUserProjectsId).subscribe((projects) => {
+    this.projectsServise.getUserProjects(this.currentUserId).subscribe((projects) => {
       if (projects) {
         this.projects = projects;
       }

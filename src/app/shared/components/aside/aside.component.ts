@@ -23,7 +23,6 @@ export class AsideComponent implements OnInit {
   ) {}
 
   currentUserId!: string;
-  currentUserProjectsId!: string[];
 
   projects: Project[] = [];
   notes: Note[] = [];
@@ -43,11 +42,10 @@ export class AsideComponent implements OnInit {
     this.auth.getCurrentUser().subscribe((user) => {
       if (user) {
         if (user.id) this.currentUserId = user.id;
-        if (user.projects) this.currentUserProjectsId = user.projects;
       }
     });
 
-    this.projectsServise.getUserProjects(this.currentUserProjectsId).subscribe((projects) => {
+    this.projectsServise.getUserProjects(this.currentUserId).subscribe((projects) => {
       if (projects) {
         this.projects = projects;
       }

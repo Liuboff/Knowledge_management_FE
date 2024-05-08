@@ -1,0 +1,12 @@
+<div class="comment">
+  <h4 class="comment__title">{{ comment.title }}</h4>
+  <div class="comment__dateCreated">{{ comment.dateCreated | date : "MMM dd, yyyy 'at' HH:mm" }}</div>
+  <div class="comment__content">{{ comment.content }}</div>
+  <div class="comment__image"><img src="{{ comment.image }}" /></div>
+
+  <div class="comment__author" *ngIf="(author$ | async) as author">
+    <div class="comment__author-name">{{ author.firstName }} {{ author.lastName }}</div>
+    <div class="comment__author-role">{{ author.role }}</div>
+  </div>
+  
+</div>

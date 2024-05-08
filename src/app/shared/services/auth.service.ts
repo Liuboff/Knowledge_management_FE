@@ -60,15 +60,14 @@ export class AuthService {
     );
   }
 
-  // getUserProfile(): Observable<User> {
-  //   return this.http.get<User>(`${Api.user}`).pipe(
-  //     map((user: User) => {
-  //       this.setCurrentUser(user);
-  //       return user;
-  //     }),
-  //     catchError(this.handleError),
-  //   );
-  // }
+  getUserInfo(userId: string): Observable<User> {
+    return this.http.get<User>(`http://localhost:3000/api/v1/users/${userId}`).pipe(
+      map((user: User) => {
+        return user;
+      }),
+      catchError(this.handleError),
+    );
+  }
 
   updateUser(user: User): Observable<User> {
     return this.http.put<User>(`${Api.userUpdate}`, user).pipe(

@@ -50,9 +50,7 @@ export class AsideComponent implements OnInit {
       }
     });
 
-    this.projectsServise
-      .getUserProjects(this.currentUserId)
-      .subscribe((projects) => {
+    this.projectsServise.getUserProjects(this.currentUserId).subscribe((projects) => {
         if (projects) {
           this.projects = projects;
         }

@@ -11,4 +11,5 @@ export interface User {
   country?: string;
   projects?: any[];
   tasks?: any[];
+  role?: string;
 }

@@ -1,16 +1,36 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, map, Observable, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 
 import { Note } from '@shared/models/note.model';
 import { Api } from '../models/api.model';
 import { Category } from '@shared/models/category.model';
+import { Comment } from '@shared/models/comment.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NotesService {
   constructor(private http: HttpClient) {}
+
+  private notesAllSubject: BehaviorSubject<Note[] | null> = new BehaviorSubject<Note[] | null>(null);
+  private notesCurrentUserSubject: BehaviorSubject<Note[] | null> = new BehaviorSubject<Note[] | null>(null);
+
+  setAllNotesList(notesList: Note[]): void {
+    this.notesAllSubject.next(notesList);
+  }
+
+  getAllNotesList(): Observable<Note[] | null> {
+    return this.notesAllSubject.asObservable();
+  }
+
+  setCurrentUserNotesList(notesList: Note[]): void {
+    this.notesCurrentUserSubject.next(notesList);
+  }
+
+  getCurrentUserNotesList(): Observable<Note[] | null> {
+    return this.notesCurrentUserSubject.asObservable();
+  }
 
   createNote(note: Note): Observable<Note> {
     return this.http.post<Note>(`http://localhost:3000/api/v1/notes/`, note).pipe(
@@ -25,6 +45,7 @@ export class NotesService {
   getNotes(): Observable<Note[]> {
     return this.http.get<Note[]>(`http://localhost:3000/api/v1/notes/`).pipe(
       map((response: Note[]) => {
+        this.setAllNotesList(response);
         return response;
       }),
 
@@ -35,6 +56,7 @@ export class NotesService {
   getUserNotes(userId: string): Observable<Note[]> {
     return this.http.get<Note[]>(`http://localhost:3000/api/v1/notes/usernotes/${userId}`).pipe(
       map((response: Note[]) => {
+        this.setCurrentUserNotesList(response);
         return response;
       }),
 
@@ -55,6 +77,26 @@ export class NotesService {
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`http://localhost:3000/api/v1/categories/`).pipe(
       map((response: Category[]) => {
+        return response;
+      }),
+
+      catchError(this.handleError),
+    );
+  }
+
+  getComments(noteId: string) {
+    return this.http.get<Comment[]>(`http://localhost:3000/api/v1/notes/comments/${noteId}`).pipe(
+      map((response: Comment[]) => {
+        return response;
+      }),
+
+      catchError(this.handleError),
+    );
+  }
+
+  createComment(comment: Comment): Observable<Note> {
+    return this.http.post<Comment>(`http://localhost:3000/api/v1/notes/commentCreate`, comment).pipe(
+      map((response: Comment) => {
         return response;
       }),
 

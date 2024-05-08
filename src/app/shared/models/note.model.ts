@@ -7,4 +7,5 @@ export interface Note {
   tags?: string[];
   categories?: string[];
   dateCreated?: string;
+  comments?: Comment[];
 }

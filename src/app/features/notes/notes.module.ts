@@ -8,12 +8,14 @@ import { NotesRoutingModule } from './notes-routing.module';
 import { NotesComponent } from './notes.component';
 import { NoteComponent } from './note/note.component'
 import { NoteCreateComponent } from './note-create/note-create.component';
+import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
   declarations: [
     NotesComponent,
     NoteComponent,
-    NoteCreateComponent
+    NoteCreateComponent,
+    CommentComponent,
   ],
   imports: [
     CommonModule,

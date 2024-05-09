@@ -16,7 +16,7 @@ export class CommentComponent implements OnInit {
   @Output() deleteCommentEvent = new EventEmitter<string>();
 
   author!: User;
-  isAuthor: boolean = true;
+  isAuthor: boolean = false;
   currentUserId!: string;
 
   ngOnInit() {

@@ -70,6 +70,16 @@ export class NotesService {
     );
   }
 
+  deleteNote(notetId: string) {
+    return this.http.delete<{success: boolean, message: string}>(`http://localhost:3000/api/v1/notes/${notetId}`).pipe(
+      map((response) => {
+        return response;
+      }),
+
+      catchError(this.handleError),
+    );
+  }
+
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`http://localhost:3000/api/v1/categories/`).pipe(
       map((response: Category[]) => {

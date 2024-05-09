@@ -5,10 +5,9 @@
   <h2 class="note__title">{{ note.title }}</h2>
   <div class="note__content">{{ note.content }}</div>
 
+  <button class="note__edit">Edit Note</button>
+  <button class="note__delete" (click)="deleteNote(note?.id!)">Delete Note</button>
   <button class="note__add" (click)="addComment()">Add Comment</button>
-  <button class="note__edit">Edit</button>
-  <button class="note__delete">Delete</button>
-
 
   <div class="create" *ngIf="noteCreation">
     <h2 class="create__title">Adding of Comment</h2>
@@ -24,7 +23,7 @@
         <input type="file" formControlName="image" id="image" class="form-control"/>
       </div>
 
-      <button type="submit" class="btn btn-primary">Створити нотатку</button>
+      <button type="submit" class="btn btn-primary">Create Comment</button>
     </form>
   </div>
 

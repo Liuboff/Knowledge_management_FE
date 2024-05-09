@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { map, Observable, switchMap } from 'rxjs';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { NotesService } from '@shared/services/notes.service';
@@ -16,7 +16,7 @@ export class NoteComponent implements OnInit {
   constructor(
     private notesService: NotesService,
     private route: ActivatedRoute,
-
+    private router: Router,
     private formBuilder: FormBuilder,
     private notesServise: NotesService,
     private auth: AuthService
@@ -51,6 +51,11 @@ export class NoteComponent implements OnInit {
       )
     );
 
+  }
+
+  deleteNote(noteId: string) {
+    this.notesService.deleteNote(noteId).subscribe();
+    this.router.navigateByUrl('');
   }
 
   onClose() {
@@ -90,7 +95,7 @@ export class NoteComponent implements OnInit {
 
   onDeleteComment(commentId: string) {
     this.notesServise.deleteComment(commentId).subscribe();
-    
+
     this.comments$ = this.route.paramMap.pipe(
       switchMap((params: ParamMap) =>
         this.notesService.getComments(this.noteId)

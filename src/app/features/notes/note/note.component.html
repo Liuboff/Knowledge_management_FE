@@ -30,7 +30,7 @@
 
     <div class="note__comments" *ngIf="(comments$ | async)?.length">
       <h3>Comments:</h3>
-      <app-comment *ngFor="let comment of (comments$ | async)" [comment]="comment"></app-comment>
+      <app-comment *ngFor="let comment of (comments$ | async)" [comment]="comment" (deleteCommentEvent)="onDeleteComment($event)"></app-comment>
     </div>
 
 </div>

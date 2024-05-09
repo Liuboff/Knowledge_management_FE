@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { Comment } from '@shared/models/comment.model';
 import { User } from '@shared/models/user.model';
@@ -13,6 +13,7 @@ import { NotesService } from '@shared/services/notes.service';
 export class CommentComponent implements OnInit {
   constructor(private authService: AuthService, private notesServise: NotesService ) {}
   @Input() comment!: Comment;
+  @Output() deleteCommentEvent = new EventEmitter<string>();
 
   author!: User;
   isAuthor: boolean = true;
@@ -35,9 +36,8 @@ export class CommentComponent implements OnInit {
 
   }
 
-  onDeleteComment(id: string) {
-    this.notesServise.deleteComment(id);
-    console.log('delete comment');
+  onDeleteComment(idComment: string) {
+    this.deleteCommentEvent.emit(idComment);
   }
 
 }

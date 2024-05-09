@@ -87,4 +87,15 @@ export class NoteComponent implements OnInit {
       });
     }
   }
+
+  onDeleteComment(commentId: string) {
+    this.notesServise.deleteComment(commentId).subscribe();
+    
+    this.comments$ = this.route.paramMap.pipe(
+      switchMap((params: ParamMap) =>
+        this.notesService.getComments(this.noteId)
+      )
+    );
+
+  }
 }

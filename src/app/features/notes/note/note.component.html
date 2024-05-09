@@ -1,12 +1,18 @@
-<div class="note" *ngIf="(note$ | async) as note">
-  <div class="note__date">
-    {{ note.dateCreated | date : "MMM dd, yyyy 'at' HH:mm" }}
+<div class="note" *ngIf="note">
+  <div class="note__header">
+    <div class="note__author" *ngIf="author">
+      <div class="note__author-name">{{ author.firstName }} {{ author.lastName }}</div>
+      <div class="note__author-role">{{ author.role }}</div>
+    </div>
+
+    <div class="note__date">{{ note.dateCreated | date : "MMM dd, yyyy 'at' HH:mm" }}</div>
   </div>
+
   <h2 class="note__title">{{ note.title }}</h2>
   <div class="note__content">{{ note.content }}</div>
 
   <button class="note__edit">Edit Note</button>
-  <button class="note__delete" (click)="deleteNote(note?.id!)">Delete Note</button>
+  <button class="note__delete" (click)="deleteNote(note.id!)">Delete Note</button>
   <button class="note__add" (click)="addComment()">Add Comment</button>
 
   <div class="create" *ngIf="noteCreation">
@@ -27,9 +33,9 @@
     </form>
   </div>
 
-    <div class="note__comments" *ngIf="(comments$ | async)?.length">
-      <h3>Comments:</h3>
-      <app-comment *ngFor="let comment of (comments$ | async)" [comment]="comment" (deleteCommentEvent)="onDeleteComment($event)"></app-comment>
-    </div>
+  <div class="note__comments" *ngIf="(comments$ | async)?.length">
+    <h3>Comments:</h3>
+    <app-comment *ngFor="let comment of (comments$ | async)" [comment]="comment" (deleteCommentEvent)="onDeleteComment($event)"></app-comment>
+  </div>
 
 </div>

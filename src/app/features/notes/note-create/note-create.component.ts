@@ -65,8 +65,8 @@ export class NoteCreateComponent implements OnInit {
     if (this.noteForm.valid) {
       const projects = this.projects;
       const tasks = this.currentUser.tasks;
-      const author = this.currentUserId;
-      const noteValue = { ...this.noteForm.value, projects, tasks, author };
+      const authorId = this.currentUserId;
+      const noteValue = { ...this.noteForm.value, projects, tasks, authorId };
 
       this.notesServise.createNote(noteValue).subscribe({
         next: () => {

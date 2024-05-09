@@ -7,6 +7,7 @@ import { NotesService } from '@shared/services/notes.service';
 import { Note } from '@shared/models/note.model';
 import { Comment } from '@shared/models/comment.model';
 import { AuthService } from '@shared/services/auth.service';
+import { User } from '@shared/models/user.model';
 @Component({
   selector: 'app-note',
   templateUrl: './note.component.html',
@@ -24,7 +25,10 @@ export class NoteComponent implements OnInit {
 
   noteId: string = '';
   note$!: Observable<Note>;
+  note!: Note;
   comments$!: Observable<Comment[]>;
+  author!: User;
+  isAuthor: boolean = false;
   currentUserId!: string;
   noteCreation: boolean = false;
   commentForm!: FormGroup;
@@ -36,21 +40,23 @@ export class NoteComponent implements OnInit {
     });
 
     this.route.paramMap
-      .pipe(map((params: ParamMap) => params.get('id')!))
-      .subscribe((id) => (this.noteId = id));
+      .pipe(map((params: ParamMap) => params.get('id')!)).subscribe((id) => {
+        this.noteId = id;
 
-    this.note$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-        this.notesService.getNoteById(this.noteId)
-      )
+        this.notesService.getNoteById(this.noteId).subscribe((note) => {
+          this.note = note;
+
+          if (this.currentUserId === this.note.authorId) {
+            this.isAuthor = true;
+          }
+
+          this.auth.getUserInfo(this.note?.authorId!)
+            .subscribe((author) => (this.author = author));
+        });
+      }
     );
 
-    this.comments$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-        this.notesService.getComments(this.noteId)
-      )
-    );
-
+    this.comments$ = this.notesService.getComments(this.noteId);
   }
 
   deleteNote(noteId: string) {
@@ -101,6 +107,5 @@ export class NoteComponent implements OnInit {
         this.notesService.getComments(this.noteId)
       )
     );
-
   }
 }

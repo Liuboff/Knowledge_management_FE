@@ -31,11 +31,8 @@ export class NoteComponent implements OnInit {
   errorMessage: string = '';
 
   ngOnInit() {
-
     this.auth.getCurrentUser().subscribe((user) => {
-      if (user) {
-        if (user.id) this.currentUserId = user.id;
-      }
+      if (user?.id) this.currentUserId = user.id;
     });
 
     this.route.paramMap
@@ -54,8 +51,6 @@ export class NoteComponent implements OnInit {
       )
     );
 
-    // this.comments$ = this.notesService.getComments(this.noteId);
-
   }
 
   onClose() {
@@ -67,7 +62,6 @@ export class NoteComponent implements OnInit {
     this.noteCreation = true;
 
     this.commentForm = this.formBuilder.group({
-      title: [''],
       content: [''],
       image: [''],
     });
@@ -79,7 +73,6 @@ export class NoteComponent implements OnInit {
       const noteId = this.noteId;
       const commentValue = { ...this.commentForm.value, authorId, noteId };
 
-      console.log(commentValue);
       this.notesServise.createComment(commentValue).subscribe({
         next: () => {
           this.onClose();

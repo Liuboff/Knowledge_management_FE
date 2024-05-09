@@ -13,10 +13,6 @@
   <div class="create" *ngIf="noteCreation">
     <h2 class="create__title">Adding of Comment</h2>
     <form [formGroup]="commentForm" (ngSubmit)="onCommentCreate()">
-      <div class="form-group">
-        <label for="title">Comment title:</label>
-        <input type="text" formControlName="title" id="title" class="form-control" />
-      </div>
 
       <div class="form-group">
         <label for="content">Comment text:</label>

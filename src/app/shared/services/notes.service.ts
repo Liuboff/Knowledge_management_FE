@@ -54,7 +54,7 @@ export class NotesService {
   }
 
   getUserNotes(userId: string): Observable<Note[]> {
-    return this.http.get<Note[]>(`http://localhost:3000/api/v1/notes/usernotes/${userId}`).pipe(
+    return this.http.get<Note[]>(`http://localhost:3000/api/v1/notes/notesByUser/${userId}`).pipe(
       map((response: Note[]) => {
         this.setCurrentUserNotesList(response);
         return response;
@@ -66,10 +66,6 @@ export class NotesService {
 
   getNoteById(id: string): Observable<Note> {
     return this.http.get<Note>(`http://localhost:3000/api/v1/notes/${id}`).pipe(
-      // map((response: Note) => {
-        // return response;
-      // }),
-
       catchError(this.handleError),
     );
   }
@@ -94,9 +90,19 @@ export class NotesService {
     );
   }
 
-  createComment(comment: Comment): Observable<Note> {
+  createComment(comment: Comment): Observable<Comment> {
     return this.http.post<Comment>(`http://localhost:3000/api/v1/notes/commentCreate`, comment).pipe(
       map((response: Comment) => {
+        return response;
+      }),
+
+      catchError(this.handleError),
+    );
+  }
+
+  deleteComment(commentId: string) {
+    return this.http.delete<{success: boolean, message: string}>(`http://localhost:3000/api/v1/notes/comments/${commentId}`).pipe(
+      map((response) => {
         return response;
       }),
 

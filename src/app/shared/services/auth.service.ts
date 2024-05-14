@@ -62,9 +62,6 @@ export class AuthService {
 
   getUserInfo(userId: string): Observable<User> {
     return this.http.get<User>(`http://localhost:3000/api/v1/users/${userId}`).pipe(
-      // map((user: User) => {
-      //   return user;
-      // }),
       catchError(this.handleError),
     );
   }

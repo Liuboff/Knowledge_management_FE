@@ -10,19 +10,19 @@ export class ProjectsService {
 
   constructor(private http: HttpClient) {}
 
-  // getUserProjects(projectsIds: string[]): Observable<Project[]> {
-  //   return this.http.post<Project[]>(`http://localhost:3000/api/v1/projects/userProjectsByIds`, projectsIds).pipe(
-  //     map((response: Project[]) => {
-  //       return response;
-  //     }),
-
-  //     catchError(this.handleError),
-  //   );
-  // }
-
   getUserProjects(userId: string): Observable<Project[]> {
-    return this.http.get<Project[]>(`http://localhost:3000/api/v1/users/projects/${userId}`).pipe(
+    return this.http.get<Project[]>(`http://localhost:3000/api/v1/projects/userProjectsByUserId/${userId}`).pipe(
       map((response: Project[]) => {
+        return response;
+      }),
+
+      catchError(this.handleError),
+    );
+  }
+
+  getProjectById(projectId: string): Observable<Project> {
+    return this.http.get<Project>(`http://localhost:3000/api/v1/users/projects/${projectId}`).pipe(
+      map((response: Project) => {
         return response;
       }),
 

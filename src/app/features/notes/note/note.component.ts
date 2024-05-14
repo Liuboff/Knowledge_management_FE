@@ -61,7 +61,7 @@ export class NoteComponent implements OnInit {
 
   deleteNote(noteId: string) {
     this.notesService.deleteNote(noteId).subscribe();
-    this.router.navigateByUrl('');
+    this.router.navigateByUrl('/notes');
   }
 
   onClose() {

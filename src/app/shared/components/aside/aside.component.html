@@ -19,16 +19,13 @@
       </ul>
     </li>
 
-    <li><span class="caret">Notes</span>
+    <li><span class="caret">My Notes</span>
       <ul class="nested">
-        <li><span class="caret">
-          <a routerLink="notes/create">Create new</a></span>
+        <li>
+          <span class="caret" routerLink="notes/create">Create new</span>
         </li>
         <li *ngFor="let note of notes">
-          <span class="caret" (click)="toggleNested($event)" routerLink="/notes/{{note.id}}">{{note.title}}</span>
-          <!-- <ul class="nested">
-            <li *ngFor="let link of note.links"><a href="#">{{link}}</a></li>
-          </ul> -->
+          <span class="caret" [routerLink]="['/notes/note', note.id]">{{note.title}}</span>
         </li>
       </ul>
     </li>

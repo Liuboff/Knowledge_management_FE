@@ -33,34 +33,18 @@ export class AsideComponent implements OnInit {
   notes: Note[] = [];
 
   ngOnInit(): void {
-    // this.projects = [
-    //   {
-    //     name: 'Project 5',
-    //     links: ['Notes', 'Ideas', 'Resources', 'Team']
-    //   },
-    //   {
-    //     name: 'Project 2',
-    //     links: ['Notes', 'Ideas', 'Resources', 'Team']
-    //   },
-    // ];
 
     this.auth.getCurrentUser().subscribe((user) => {
-      if (user) {
-        if (user.id) this.currentUserId = user.id;
-      }
+      this.currentUserId = user?.id!;
     });
 
     this.projectsServise.getUserProjects(this.currentUserId).subscribe((projects) => {
-        if (projects) {
-          this.projects = projects;
-        }
+        this.projects = projects!;
         this.cd.markForCheck();
-      });
+    });
 
     this.notesServise.getUserNotes(this.currentUserId).subscribe((notes) => {
-      if (notes) {
-        this.notes = notes;
-      }
+      this.notes = notes!;
       this.cd.markForCheck();
     });
 

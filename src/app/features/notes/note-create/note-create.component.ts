@@ -37,8 +37,8 @@ export class NoteCreateComponent implements OnInit {
       content: [''],
       image: [''],
       tags: [''],
-      categories: [[]],
-      project: [[]],
+      category: '',
+      project: '',
     });
 
     this.auth.getCurrentUser().subscribe((user) => {
@@ -63,10 +63,13 @@ export class NoteCreateComponent implements OnInit {
 
   onSubmit(): void {
     if (this.noteForm.valid) {
-      const projects = this.projects;
+
+      console.log('this.noteForm.value');
+      console.log(this.noteForm.value);
+      // const projects = this.projects;
       const tasks = this.currentUser.tasks;
       const authorId = this.currentUserId;
-      const noteValue = { ...this.noteForm.value, projects, tasks, authorId };
+      const noteValue = { ...this.noteForm.value, tasks, authorId };
 
       this.notesServise.createNote(noteValue).subscribe({
         next: () => {

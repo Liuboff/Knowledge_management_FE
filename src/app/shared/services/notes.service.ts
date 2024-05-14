@@ -64,6 +64,16 @@ export class NotesService {
     );
   }
 
+  getProjectNotes(projectId: string): Observable<Note[]> {
+    return this.http.get<Note[]>(`http://localhost:3000/api/v1/notes/notesByProject/${projectId}`).pipe(
+      map((response: Note[]) => {
+        return response;
+      }),
+
+      catchError(this.handleError),
+    );
+  }
+
   getNoteById(id: string): Observable<Note> {
     return this.http.get<Note>(`http://localhost:3000/api/v1/notes/${id}`).pipe(
       catchError(this.handleError),

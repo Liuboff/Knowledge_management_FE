@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
 import { Project } from '@shared/models/project.model';
 
 @Component({
@@ -6,11 +7,6 @@ import { Project } from '@shared/models/project.model';
   templateUrl: './project.component.html',
   styleUrl: './project.component.scss'
 })
-export class ProjectComponent implements OnInit {
+export class ProjectComponent {
   @Input() project!: Project;
-
-  ngOnInit() {
-    console.log(this.project);
-  }
-
 }

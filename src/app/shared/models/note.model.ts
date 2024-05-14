@@ -5,7 +5,8 @@ export interface Note {
   content?: string;
   image?: string;
   tags?: string[];
-  categories?: string[];
+  category?: string;
+  project?: string;
   dateCreated?: string;
   comments?: Comment[];
 }

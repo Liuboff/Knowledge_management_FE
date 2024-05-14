@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 import { Project } from '@shared/models/project.model';
-import { User } from '@shared/models/user.model';
 import { AuthService } from '@shared/services/auth.service';
 import { ProjectsService } from '@shared/services/projects.service';
 
@@ -12,7 +11,7 @@ import { ProjectsService } from '@shared/services/projects.service';
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss'],
 })
-export class ProjectsComponent implements OnInit, OnDestroy {
+export class ProjectsComponent implements OnInit {
   projects: Project[] = [];
   userId!: string;
   private subscription: Subscription = new Subscription();
@@ -33,9 +32,9 @@ export class ProjectsComponent implements OnInit, OnDestroy {
     });
   }
 
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
+  // ngOnDestroy() {
+  //   if (this.subscription) {
+  //     this.subscription.unsubscribe();
+  //   }
+  // }
 }

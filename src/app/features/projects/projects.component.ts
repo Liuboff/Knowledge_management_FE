@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { Project } from '@shared/models/project.model';
 import { User } from '@shared/models/user.model';
@@ -8,19 +10,32 @@ import { ProjectsService } from '@shared/services/projects.service';
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
-  styleUrl: './projects.component.scss',
+  styleUrls: ['./projects.component.scss'],
 })
-export class ProjectsComponent implements OnInit {
-  constructor(private auth: AuthService, private projectsServise: ProjectsService) {}
-
+export class ProjectsComponent implements OnInit, OnDestroy {
   projects: Project[] = [];
   userId!: string;
-  user!: User;
+  private subscription: Subscription = new Subscription();
+
+  constructor(
+    private auth: AuthService,
+    private projectsService: ProjectsService
+  ) {}
 
   ngOnInit() {
-    this.auth.getCurrentUser().subscribe(user => this.userId = user?.id!);
+    this.subscription = this.auth.getCurrentUser().pipe(
+      switchMap(user => {
+        this.userId = user?.id!;
+        return this.projectsService.getUserProjects(this.userId);
+      })
+    ).subscribe(projects => {
+      this.projects = projects;
+    });
+  }
 
-    this.projectsServise.getUserProjects(this.userId).subscribe(projects => this.projects = projects);
-
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

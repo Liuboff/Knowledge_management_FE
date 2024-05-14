@@ -14,11 +14,7 @@
     <li><span class="caret">Projects</span>
       <ul class="nested">
         <li *ngFor="let project of projects">
-          <span class="caret" (click)="toggleNested($event)">{{project.name}}</span>
-          <ul class="nested">
-            <li><a href="#">{{project.team}}</a></li>
-            <li><a href="#">{{project.tasks}}</a></li>
-          </ul>
+          <span class="caret" [routerLink]="['/projects', project.id]">{{project.name}}</span>
         </li>
       </ul>
     </li>

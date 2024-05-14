@@ -1,7 +1,7 @@
 <div class="projects">
   <h1 class="projects__title">Your Available Projects</h1>
   <div class="projects__items">
-    <app-project></app-project>
-    <app-project></app-project>
+    <app-project *ngFor="let project of projects" [project]="project" [routerLink]="['/projects', project.id]"></app-project>
+    <!-- <app-project></app-project> -->
   </div>
 </div>

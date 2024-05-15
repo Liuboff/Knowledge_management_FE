@@ -16,10 +16,7 @@ export class ProjectsComponent implements OnInit {
   userId!: string;
   private subscription: Subscription = new Subscription();
 
-  constructor(
-    private auth: AuthService,
-    private projectsService: ProjectsService
-  ) {}
+  constructor(private auth: AuthService, private projectsService: ProjectsService) {}
 
   ngOnInit() {
     this.subscription = this.auth.getCurrentUser().pipe(
@@ -32,9 +29,9 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
-  // ngOnDestroy() {
-  //   if (this.subscription) {
-  //     this.subscription.unsubscribe();
-  //   }
-  // }
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 }

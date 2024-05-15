@@ -63,18 +63,13 @@ export class NoteCreateComponent implements OnInit {
 
   onSubmit(): void {
     if (this.noteForm.valid) {
-
-      console.log('this.noteForm.value');
-      console.log(this.noteForm.value);
-      // const projects = this.projects;
-      const tasks = this.currentUser.tasks;
       const authorId = this.currentUserId;
-      const noteValue = { ...this.noteForm.value, tasks, authorId };
+      const noteValue = { ...this.noteForm.value, authorId };
 
       this.notesServise.createNote(noteValue).subscribe({
         next: () => {
           this.onClose();
-          this.router.navigateByUrl('notes');
+          this.router.navigateByUrl(`notes?projectId=${noteValue.project}`);
         },
         error: (error) => {
           this.errorMessage = error.message;

@@ -11,12 +11,12 @@
       <a href="#">Jira</a></span>
     </li>
 
-    <li><span class="caret">Projects</span>
-      <ul class="nested">
+    <li><span class="caret" [routerLink]="['/projects']">Projects</span>
+      <!-- <ul class="nested">
         <li *ngFor="let project of projects">
           <span class="caret" [routerLink]="['/projects', project.id]">{{project.name}}</span>
         </li>
-      </ul>
+      </ul> -->
     </li>
 
     <li><span class="caret">My Notes</span>
@@ -25,7 +25,7 @@
           <span class="caret" routerLink="notes/create">Create new</span>
         </li>
         <li *ngFor="let note of notes">
-          <span class="caret" [routerLink]="['/notes/note', note.id]">{{note.title}}</span>
+          <span class="caret" [routerLink]="['/notes', note.id]">{{note.title}}</span>
         </li>
       </ul>
     </li>

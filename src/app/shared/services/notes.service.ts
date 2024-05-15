@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 
 import { Note } from '@shared/models/note.model';
-import { Api } from '../models/api.model';
 import { Category } from '@shared/models/category.model';
 import { Comment } from '@shared/models/comment.model';
 
@@ -13,31 +12,11 @@ import { Comment } from '@shared/models/comment.model';
 export class NotesService {
   constructor(private http: HttpClient) {}
 
-  private notesAllSubject: BehaviorSubject<Note[] | null> = new BehaviorSubject<Note[] | null>(null);
-  private notesCurrentUserSubject: BehaviorSubject<Note[] | null> = new BehaviorSubject<Note[] | null>(null);
-
-  setAllNotesList(notesList: Note[]): void {
-    this.notesAllSubject.next(notesList);
-  }
-
-  getAllNotesList(): Observable<Note[] | null> {
-    return this.notesAllSubject.asObservable();
-  }
-
-  setCurrentUserNotesList(notesList: Note[]): void {
-    this.notesCurrentUserSubject.next(notesList);
-  }
-
-  getCurrentUserNotesList(): Observable<Note[] | null> {
-    return this.notesCurrentUserSubject.asObservable();
-  }
-
   createNote(note: Note): Observable<Note> {
     return this.http.post<Note>(`http://localhost:3000/api/v1/notes/`, note).pipe(
       map((response: Note) => {
         return response;
       }),
-
       catchError(this.handleError),
     );
   }
@@ -45,10 +24,8 @@ export class NotesService {
   getNotes(): Observable<Note[]> {
     return this.http.get<Note[]>(`http://localhost:3000/api/v1/notes/`).pipe(
       map((response: Note[]) => {
-        this.setAllNotesList(response);
         return response;
       }),
-
       catchError(this.handleError),
     );
   }
@@ -56,10 +33,8 @@ export class NotesService {
   getUserNotes(userId: string): Observable<Note[]> {
     return this.http.get<Note[]>(`http://localhost:3000/api/v1/notes/notesByUser/${userId}`).pipe(
       map((response: Note[]) => {
-        this.setCurrentUserNotesList(response);
         return response;
       }),
-
       catchError(this.handleError),
     );
   }
@@ -69,7 +44,6 @@ export class NotesService {
       map((response: Note[]) => {
         return response;
       }),
-
       catchError(this.handleError),
     );
   }
@@ -85,7 +59,6 @@ export class NotesService {
       map((response) => {
         return response;
       }),
-
       catchError(this.handleError),
     );
   }
@@ -95,7 +68,6 @@ export class NotesService {
       map((response: Category[]) => {
         return response;
       }),
-
       catchError(this.handleError),
     );
   }
@@ -105,7 +77,6 @@ export class NotesService {
       map((response: Comment[]) => {
         return response;
       }),
-
       catchError(this.handleError),
     );
   }
@@ -115,7 +86,6 @@ export class NotesService {
       map((response: Comment) => {
         return response;
       }),
-
       catchError(this.handleError),
     );
   }
@@ -125,7 +95,6 @@ export class NotesService {
       map((response) => {
         return response;
       }),
-
       catchError(this.handleError),
     );
   }

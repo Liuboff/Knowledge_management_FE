@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
+// import { filter } from 'rxjs/operators';
 
 import { NotesService } from '@shared/services/notes.service';
 import { Note } from '@shared/models/note.model';
@@ -12,9 +13,18 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class NotesComponent {
 
-  constructor(private notesService: NotesService, private activatedroute: ActivatedRoute) {}
+  constructor(private notesService: NotesService, private route: ActivatedRoute) {}
 
-  // notes$: Observable<Note[]> = this.notesService.getProjectNotes('6638d500d702ab3e83af0dab');
-  notes$: Observable<Note[]> = this.notesService.getNotes();
+  prId!: string;
+  notes$!: Observable<Note[]>;
+
+  ngOnInit() {
+    this.route.queryParams
+      .subscribe(params => {
+        this.prId = params['projectId'];
+        this.notes$ = this.notesService.getProjectNotes(this.prId);
+      }
+    );
+  }
 
 }

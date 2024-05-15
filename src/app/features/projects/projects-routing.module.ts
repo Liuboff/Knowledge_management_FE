@@ -5,8 +5,7 @@ import { ProjectsComponent } from './projects.component';
 import { ProjectComponent } from './project/project.component';
 
 const routes: Routes = [
-  { path: '', component: ProjectsComponent },
-  // { path: 'project', component: ProjectComponent }, //////////////// temporary ////////////////
+  { path: '', pathMatch: 'full', component: ProjectsComponent },
   { path: ':id', component: ProjectComponent },
 ];
 

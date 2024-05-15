@@ -1,5 +1,5 @@
 <div class="project">
-  <h2 class="project__title">Knowledge management</h2>
+  <h2 class="project__title">{{project.name}}</h2>
   <p class="project__info">
     Our purpose is to develop information system for Knowledge management in IT projects
   </p>
@@ -14,6 +14,12 @@
     <h3 class="team__title">Team members</h3>
     <div class="team__owner">Project owner: "hjjk jlkjlk (as link)"</div>
     <div class="team__members">
+      <div class="team__member" *ngFor="let member of project.team">
+        <div class="team__member-name">{{ 'member.firstName' }} {{ 'member.lastName' }}</div>
+        <div class="team__member-role">{{ 'member.role' }}</div>
+        <a class="team__member-email">{{ 'посилання на імейл' }}</a>
+      </div>
+<!--
       <div class="team__member">
         <div class="team__member-name">{{ 'member.firstName' }} {{ 'member.lastName' }}</div>
         <div class="team__member-role">{{ 'member.role' }}</div>
@@ -24,19 +30,13 @@
         <div class="team__member-name">{{ 'member.firstName' }} {{ 'member.lastName' }}</div>
         <div class="team__member-role">{{ 'member.role' }}</div>
         <a class="team__member-email">{{ 'посилання на імейл' }}</a>
-      </div>
-
-      <div class="team__member">
-        <div class="team__member-name">{{ 'member.firstName' }} {{ 'member.lastName' }}</div>
-        <div class="team__member-role">{{ 'member.role' }}</div>
-        <a class="team__member-email">{{ 'посилання на імейл' }}</a>
-      </div>
+      </div> -->
     </div>
   </div>
 
   <div class="project__notes notes">
     <h3 class="notes__title">Project notes</h3>
-    <a [routerLink]="['/notes']" class="notes__link">Go to Notes</a>
+    <a [routerLink]="['/notes']" [queryParams]="{ 'projectId': projectId}" class="notes__link">Go to Notes</a>
   </div>
 
   <div class="project__jira jira">

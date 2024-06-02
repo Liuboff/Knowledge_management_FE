@@ -57,12 +57,15 @@ export class LoginComponent implements OnInit {
       this.authService.login(this.email?.value, this.password?.value).subscribe({
         next: () => {
           this.onClose();
+          alert('You logined successfully.');
+          this.router.navigateByUrl('projects');
         },
         error: (error) => {
           this.errorMessage = error.message;
           setTimeout(() => {
             this.onClose();
           }, 2000);
+          alert('You don\'t login.');
           this.router.navigateByUrl('auth/register');
         },
       });
@@ -71,7 +74,6 @@ export class LoginComponent implements OnInit {
 
   onClose() {
     this.loginForm.reset();
-    this.router.navigateByUrl('');
   }
 
   toggleShowPassword(): void {

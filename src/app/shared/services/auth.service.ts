@@ -4,7 +4,6 @@ import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { User } from '@shared/models/user.model';
-import { Api } from '../models/api.model';
 
 @Injectable({
   providedIn: 'root',

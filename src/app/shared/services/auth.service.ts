@@ -67,7 +67,7 @@ export class AuthService {
   }
 
   updateUser(user: User): Observable<User> {
-    return this.http.put<User>(`${Api.userUpdate}`, user).pipe(
+    return this.http.put<User>(`http://localhost:3000/api/v1/users/${user.id}`, user).pipe(
       map((response: User) => {
         if (response.token) {
           localStorage.setItem('token', response.token);
@@ -102,6 +102,12 @@ export class AuthService {
     this.clearLogoutTimeout = setTimeout(() => {
       this.logout();
     }, timeUntilExpiration);
+  }
+
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`http://localhost:3000/api/v1/users`).pipe(
+      catchError(this.handleError),
+    );
   }
 
   private isValidToken (): boolean {

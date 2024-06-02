@@ -22,6 +22,7 @@ export class NoteCreateComponent implements OnInit {
 
   categories!: Category[];
   projects!: Project[];
+  imageDisplay!: string | ArrayBuffer | null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,9 +37,8 @@ export class NoteCreateComponent implements OnInit {
       title: [''],
       content: [''],
       image: [''],
-      tags: [''],
-      category: '',
-      project: '',
+      category: [''],
+      project: ['']
     });
 
     this.auth.getCurrentUser().subscribe((user) => {
@@ -63,13 +63,23 @@ export class NoteCreateComponent implements OnInit {
 
   onSubmit(): void {
     if (this.noteForm.valid) {
-      const authorId = this.currentUserId;
-      const noteValue = { ...this.noteForm.value, authorId };
+      const noteFormData = new FormData();
 
-      this.notesServise.createNote(noteValue).subscribe({
+      Object.keys(this.noteForm.controls).forEach(key => {
+        noteFormData.append(key, this.noteForm.get(key)?.value);
+      });
+
+      noteFormData.append('authorId', this.currentUserId);
+
+      // for (let pair of noteFormData as any) {
+      //   console.log(pair[0] + ': ' + pair[1]);
+      // }
+
+      this.notesServise.createNote(noteFormData).subscribe({
         next: () => {
+          let proj = this.noteForm.get('project')?.value;
           this.onClose();
-          this.router.navigateByUrl(`notes?projectId=${noteValue.project}`);
+          this.router.navigateByUrl(`notes?projectId=${proj}`);
         },
         error: (error) => {
           this.errorMessage = error.message;
@@ -79,6 +89,20 @@ export class NoteCreateComponent implements OnInit {
           this.router.navigateByUrl('');
         },
       });
+
+    }
+  }
+
+  onImageUpload(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.noteForm.patchValue({image: file});
+      this.noteForm.get('image')?.updateValueAndValidity();
+      const fileReader = new FileReader();
+      fileReader.onload = () => {
+        this.imageDisplay = fileReader.result;
+      }
+      fileReader.readAsDataURL(file);
     }
   }
 

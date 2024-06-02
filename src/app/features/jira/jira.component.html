@@ -1,0 +1,203 @@
+<nav class="navbar navbar-expand-lg bg-white mynav p-0">
+  <div class="container-fluid">
+    <a class="navbar-brand align-self-baseline" href="#"><i class="fa-solid fa-bars me-3"></i>Jira Software</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02"
+          aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-dark">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-dark content-hover" href="#" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Your Work
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="board">Board</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark content-hover" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+              Projects
+            </a>
+            <ul class="dropdown-menu">
+              <li *ngFor="let project of projectList" (click)="setProject(project)">
+                <a class="dropdown-item" >{{project.name}}</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark content-hover" href="#" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+              Filters
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark content-hover" href="#" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              Dashboard
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark content-hover" href="#" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+              Teams
+            </a>
+            <ul class="dropdown-menu">
+              <li *ngFor="let user of userList">
+                <a class="dropdown-item" >{{user.firstName}} {{user.lastName}}</a>
+              </li>
+          </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark content-hover" href="#" role="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
+              Apps
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" >
+              <button class="btn bg-primary p-0 px-1  text-white " data-bs-toggle="modal"
+                  data-bs-target="#exampleModal">
+                Create issue
+              </button>
+            </a>
+          </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control srch-issue" type="search" placeholder="Search issue" aria-label="Search">
+          </form>
+      </div>
+  </div>
+</nav>
+<div class="container-fluid pt-2">
+  <div class="row pt-1">
+    <div class="col" *ngFor="let stat of status">
+      <div class="card card-bg">
+        <div class="card-header border-0 py-1"> {{stat}}</div>
+        <app-task-preview [task]="task" draggable="true" *ngFor="let task of filterTasks(stat)" class="card-Body-Hover m-1 rounded-1 task"></app-task-preview>
+      </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header d-flex ">
+        <div>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Create Issue</h1>
+        </div>
+        <div>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-4">
+              <div class="project-model">
+                  <label for="">Project <span class="text-danger">*</span></label>
+                  <select name="ticketObj" [(ngModel)]="taskObj.projectId" id="" class="form-select mb-3">
+                      <option *ngFor="let project of projectList" [value]="project.id">{{project.name}}</option>
+                  </select>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-4">
+              <label for="">Issue Type<span class="text-danger">*</span></label>
+              <select name="" [(ngModel)]="taskObj.type" class="form-select">
+                <!-- <option value="">
+                  <i class="fa-solid fa-square-check" style="color: #7ea6ec;"></i>
+                  Select
+                </option> -->
+                <option *ngFor="let type of issueTypes">{{type}}</option>
+              </select>
+            </div>
+            <div class="col-4">
+              <label for="">Status <span><i class="fa fa-circle-info"></i></span></label>
+              <select name="" [(ngModel)]="taskObj.status" class="form-select">
+                <option *ngFor="let sta of status">{{sta}}</option>
+              </select>
+            </div>
+            <div class="col-12  mb-3">
+              <label for="">Title <span class="text-danger">*</span></label>
+              <input type="text" name="summary" [(ngModel)]="taskObj.title" class="form-control border inputbg border-2">
+            </div>
+            <div class="col-12 mb-3">
+              <label for="">Description</label>
+              <textarea name="description" [(ngModel)]="taskObj.content" cols="30" rows="5" class="form-control"></textarea>
+            </div>
+            <div class="col-6 mb-3">
+              <label for="">Assignee</label>
+              <select name="assignedTo" [(ngModel)]="taskObj.assigneeId" class="mb-1 form-select">
+                <option *ngFor="let user of userList" [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
+              </select>
+              <span><a href="" class="text-decoration-none fw-semibold">Assign to me</a></span>
+            </div>
+
+            <div class="col-6 mb-3">
+              <label for="">Reporter</label>
+              <select name="createdBy" [(ngModel)]="taskObj.reporterId" class="mb-1 form-select">
+                <option *ngFor="let user of userList" [value]="user.id">{{user.firstName}} {{user.lastName}}</option>
+              </select>
+            </div>
+            <div class="col-12 mb-3">
+              <label for="">Attachment</label>
+              <div class="border border-dotted text-center p-5">
+                <span><i class="fa fa-cloud-arrow-up"></i>Drop files to attach or
+                  <a href="#" class="text-decoration-none">
+                    <label class="custom-file-upload">
+                      <input type="file"   />
+                      <i class="fa fa-cloud-arrow-up"></i>
+                      browse
+                    </label>
+                  </a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer justify-content-between">
+        <div>
+          <input type="checkbox" name="" id="">
+          <span>
+            Create another issue
+          </span>
+        </div>
+        <div>
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="onTaskCreate()">Create</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

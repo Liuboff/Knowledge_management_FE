@@ -2,35 +2,26 @@
   <h1 class="create__title">Creation of note</h1>
   <form [formGroup]="noteForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
-      <label for="title">Назва нотатки:</label>
-      <input
-        type="text"
-        formControlName="title"
-        id="title"
-        class="form-control"
-      />
+      <label for="title">Note Title:</label>
+      <input type="text" formControlName="title" id="title" class="form-control"/>
     </div>
 
     <div class="form-group">
-      <label for="content">Текст нотатки:</label>
+      <label for="content">Text of Note:</label>
       <editor formControlName="content" id="content" apiKey="x2kj148c3unh8b6qvj3uwk2poqwxozayxnc7mw5nif072vlq" [init]="{plugins: 'link'}"></editor>
     </div>
 
     <div class="form-group">
-      <label for="image">Зображення:</label>
-      <input
-        type="file"
-        formControlName="image"
-        id="image"
-        class="form-control"
-      />
+      <label for="image">Image:</label>
+      <input type="file" id="image" class="form-control" accept="image/*" (change)="onImageUpload($event)"/>
+
+      <div style="width: 100px;" *ngIf="imageDisplay">
+        <img style="width: 100%;" [src]="imageDisplay" alt="image">
+      </div>
     </div>
+
     <div class="form-group">
-      <label for="tags">Теги:</label>
-      <input type="text" formControlName="tags" id="tags" class="form-control" />
-    </div>
-    <div class="form-group">
-      <label for="category">Категорія:</label>
+      <label for="category">Category:</label>
       <select formControlName="category" id="category" class="form-control">
         <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
       </select>
@@ -43,7 +34,7 @@
       </select>
     </div>
 
-    <button type="submit" class="btn btn-primary">Створити нотатку</button>
+    <button type="submit" class="btn btn-primary">Create Note</button>
   </form>
 </div>
 

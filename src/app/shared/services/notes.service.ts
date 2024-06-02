@@ -12,9 +12,10 @@ import { Comment } from '@shared/models/comment.model';
 export class NotesService {
   constructor(private http: HttpClient) {}
 
-  createNote(note: Note): Observable<Note> {
+  createNote(note: FormData): Observable<Note> {
     return this.http.post<Note>(`http://localhost:3000/api/v1/notes/`, note).pipe(
       map((response: Note) => {
+        console.log(response);
         return response;
       }),
       catchError(this.handleError),

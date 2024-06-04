@@ -1,17 +1,12 @@
 <div class="aside">
   <ul class="aside__list">
 
-    <li><span class="caret">
-      <a href="#">Company</a></span>
-    </li>
-    <li><span class="caret">
-      <a href="#">People?</a></span>
-    </li>
-    <li>
-      <span class="caret" [routerLink]="['/jira']">Jira</span>
-    </li>
+    <li><span class="caret">Company</span></li>
+    <li><span class="caret" [routerLink]="['/people']">People</span></li>
+    <li><span class="caret" [routerLink]="['/jira']">Jira</span></li>
 
-    <li><span class="caret" [routerLink]="['/projects']">Projects</span>
+    <li>
+      <span class="caret" [routerLink]="['/projects']">Projects</span>
       <!-- <ul class="nested">
         <li *ngFor="let project of projects">
           <span class="caret" [routerLink]="['/projects', project.id]">{{project.name}}</span>
@@ -19,34 +14,22 @@
       </ul> -->
     </li>
 
-    <li><span class="caret">My Notes</span>
+    <li>
+      <span class="caret">My Notes</span>
       <ul class="nested">
         <li>
-          <span class="caret" routerLink="notes/create">Create new</span>
+          <span class="caret" routerLink="/notes/create">Create new</span>
         </li>
         <li *ngFor="let note of notes">
-          <span class="caret" [routerLink]="['/notes', note.id]">{{note.title}}</span>
+          <span class="caret" [routerLink]="['/notes', note.id]">{{note.title| slice: 0 : 30 }}{{ note.title.length > 20 ? '...' : '' }}</span>
         </li>
       </ul>
     </li>
 
-    <li><span class="caret">
-      <a href="#">Announcements</a></span>
-    </li>
-
-    <li><span class="caret">
-      <a href="#">Calendar</a></span>
-    </li>
-
-    <li><span class="caret">
-      <a href="#">Learning</a></span>
-    </li>
-
-    <li><span class="caret">
-      <a href="#">Onboarding</a></span>
-    </li>
-    <li><span class="caret">
-      <a href="#">Helthcare</a></span>
-    </li>
+    <li><span class="caret">Announcements</span></li>
+    <li><span class="caret">Calendar</span></li>
+    <li><span class="caret">Learning</span></li>
+    <li><span class="caret">Onboarding</span></li>
+    <li><span class="caret">Helthcare</span></li>
   </ul>
 </div>

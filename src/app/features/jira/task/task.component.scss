@@ -1,0 +1,25 @@
+@import '../../../../styles/constants';
+
+.task{
+    height: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: rgba($color: $blue400, $alpha: 0.1);
+    box-shadow: 0px 0px 10px #ccc;
+
+    &__title{
+        font-size: 25px;
+        color: $blue900;
+    }
+    &__name{
+        font-size: 14px;
+    }
+    &__change{
+        display: flex;
+        align-items: center;
+    }
+    &__description{
+        color: $blue500;
+    }
+  }

@@ -22,6 +22,16 @@ export class NotesService {
     );
   }
 
+  updateNote(noteId: string, note: FormData): Observable<Note> {
+    return this.http.put<Note>(`http://localhost:3000/api/v1/notes/${noteId}`, note).pipe(
+      map((response: Note) => {
+        console.log('updateNote-', response);
+        return response;
+      }),
+      catchError(this.handleError),
+    );
+  }
+
   getNotes(): Observable<Note[]> {
     return this.http.get<Note[]>(`http://localhost:3000/api/v1/notes/`).pipe(
       map((response: Note[]) => {

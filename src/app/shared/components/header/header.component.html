@@ -1,14 +1,19 @@
 <header class="header">
   <div class="header__logo">
-    <a routerLink="" routerLinkActive="router-link-active" >KM</a></div>
+    <a routerLink="" routerLinkActive="router-link-active" >
+      <img src="./assets/KM_LOGO_3.png" alt="">
+    </a></div>
   <div class="header__search">
-    <form>
-      <input type="search" placeholder="Search...">
-      <button type="submit"></button>
-    </form>
+    <input type="text" placeholder="Search...">
+    <img src="./assets/search.png" alt="">
   </div>
   <div class="header__auth">
     <a routerLink="auth/login" class="header__login" *ngIf="!isLoggedIn">Login</a>
     <a (click)="onLogout()" class="header__login" *ngIf="isLoggedIn">Logout</a>
+
+    <div class="avatar__wrapper">
+      <img class="avatar__img" src="../../../../assets/header-icons/user-icon.svg" alt="user avatar" *ngIf="!initials">
+      <p class="avatar__initials" *ngIf="initials">{{initials}}</p>
+    </div>
   </div>
 </header>

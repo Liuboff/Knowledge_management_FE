@@ -1,0 +1,45 @@
+@import '../../../styles/constants';
+
+.people{
+    height: 100%;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: rgba($color: $blue400, $alpha: 0.1);
+    box-shadow: 0px 0px 10px #ccc;
+
+    h3{
+        text-align: center;
+        color: $blue900;
+    }
+    &__info{
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 20px;
+    }
+}
+.info{
+    width: 370px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: rgba($color: $blue400, $alpha: 0.1);
+    box-shadow: 0px 0px 10px #ccc;
+    margin-bottom: 20px;
+    &__name{
+        font-size: 20px;
+        color: $blue500;
+    }
+    &__role{
+        font-size: 14px;
+        color: $lightsand300;
+    }
+    &__number{
+        font-size: 14px;;
+    }
+    &__email{
+        span{
+            color: #000;
+        }
+    }
+}

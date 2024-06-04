@@ -2,22 +2,14 @@
 
 .login {
   width: $login-component-width;
-  margin: 30px auto;
+  margin: 0 auto;
   background-color: $white;
+  border-radius: 10px;
   box-shadow: 0 0 7px 0 rgba(0, 0, 0, 25%);
 
   &__logo {
-    margin-bottom: 34px;
     display: inline-flex;
-    align-items: first baseline;
-    background-color: $blue500;
     cursor: pointer;
-
-    &-img {
-      display: block;
-      width: 44px;
-      height: 44px;
-    }
 
     &-text {
       font-family: Baskerville, sans-serif;
@@ -85,8 +77,8 @@
   &__close {
     width: 22.5px;
     height: 22.5px;
-    top: -20px;
-    right: 10px;
+    top: -80px;
+    right: 20px;
     position: absolute;
     border-radius: 50%;
     background-color: $grey600;
@@ -162,6 +154,10 @@
       font-size: $font-small;
     }
   }
+}
+.login__logo img{
+  width: 80px;
+  margin: 10px 0 20px 45px;
 }
 
 .errorMessage {

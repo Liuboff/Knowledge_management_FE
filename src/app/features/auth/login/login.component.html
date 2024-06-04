@@ -1,8 +1,8 @@
 <div class="login">
-  <div class="login__logo" routerLink="catalog">
-    <!-- <img class="login__logo-img" src="assets/header-icons/logo-icon.png" alt="logo" /> -->
-    <div class="login__logo-text">KM</div>
+  <div class="login__logo">
+      <img src="./assets/KM_LOGO_3.png" alt="">
   </div>
+
   <div class="login__content">
     <h1 class="login__title">{{ "Log In" | titlecase }}</h1>
     <form class="login__form" [formGroup]="loginForm" (ngSubmit)="onLogin()">

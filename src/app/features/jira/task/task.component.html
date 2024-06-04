@@ -1,9 +1,9 @@
-<div *ngIf="task">
-  <div class="my-1 fw-bold">{{ task.title }}</div>
+<div *ngIf="task" class="task">
+  <div class="task__title">{{ task.title }}</div>
 
   <div class="row">
     <div class="col-9">
-      <p class="space-font m-0 pointer">
+      <p class="task__name">
         <ng-container *ngIf="assignee$ | async as assignee">
           {{ assignee.firstName! }} {{ assignee.lastName! }}
         </ng-container>
@@ -12,7 +12,7 @@
     <div class="col-3 my-1 fw-bold text-end">{{ task.dateStart | date }}</div>
   </div>
 
-  <div class="row">
+  <div class="task__change">
     <div class="col-3 mb-3">
       <label for="">Change Status:</label>
       <select name="assignedTo" [(ngModel)]="task.status" class="mb-1 form-select">
@@ -26,7 +26,8 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="task__description">
+    <h4>Description:</h4>
     <div class="col-12">
       <p class="text-muted space-font m-0">{{ task.content }}</p>
     </div>

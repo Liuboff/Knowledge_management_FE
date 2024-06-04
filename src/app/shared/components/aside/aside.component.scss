@@ -1,21 +1,35 @@
-.aside {
+@import '../../../../styles/constants';
+
+.aside{
   margin: 20px 15px;
-  height: calc(100% - 40px);
   overflow-y: auto;
+  min-height: 75vh;
+
+  &__list{
+    margin-left: -25px;
+
+    li {
+      margin-bottom: 15px;
+    }
+
+    li:hover {
+      text-shadow: $blue400 1px 1px 15px;
+    }
+  }
 
   .caret {
     cursor: pointer;
     user-select: none; /* Prevent text selection */
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 80%;
   }
-
   /* Create the caret/arrow with a unicode, and style it */
   .caret::before {
-    // content: "\25B6";
     content: "\003e";
     transform: rotate(90deg);
-    color: black;
     display: inline-block;
-    margin-right: 6px;
+    margin-right: 5px;
     margin-bottom: 10px;
   }
 
@@ -32,8 +46,9 @@
   /* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
   .active {
     display: block;
-    margin-left: 20px;
+    margin-left: -20px;
     margin-bottom: 10px;
   }
 
 }
+

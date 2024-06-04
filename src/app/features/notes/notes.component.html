@@ -3,7 +3,7 @@
     <div class="note__date">
       {{ note.dateCreated | date : "MMM dd, yyyy 'at' HH:mm" }}
     </div>
-    <h2 class="note__title">{{ note.title }}</h2>
-    <div class="note__content">{{ note.content }}</div>
+    <h2 class="note__title">{{ note.title }}{{ note.title.length > 40 ? '...' : '' }}</h2>
+    <div class="note__content" [innerHTML]="note.content"></div>
   </div>
 </div>

@@ -1,0 +1,45 @@
+@import '../../../../styles/constants';
+
+
+.comment{
+    width: 80%;
+    border: 1px solid $blue400;
+    border-radius: 10px;
+    margin: 10px 0;
+    padding: 0 10px;
+    background-color: #fafafa;
+
+    &__author{
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__author-role{
+        font-size: 10px;
+        color: $blue400;
+    }
+    &__dateCreated{
+        font-size: 12px;
+        color: $lightsand300;
+    }
+    &__contents{
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+    &__delete{
+        width: 60px;
+        height: 30px;
+        padding: 5px 12px;
+        border-radius: 10px;
+        color: #fff;
+        border: none;
+        background-color: $lightsand100;
+        font-size: 12px;
+        transition: all 0.3s;
+    }
+    &__delete:hover{
+        background-color: $lightsand300;
+    }
+}

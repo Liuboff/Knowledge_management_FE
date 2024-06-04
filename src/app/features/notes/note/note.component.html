@@ -1,23 +1,24 @@
 <div class="note" *ngIf="note">
-  <div class="note__header">
-    <div class="note__author" *ngIf="author">
-      <div class="note__author-name">{{ author.firstName }} {{ author.lastName }}</div>
-      <div class="note__author-role">{{ author.role }}</div>
+  <div class="note__up">
+    <h2 class="note__title">{{ note.title }}</h2>
+
+    <div class="note__header">
+      <div class="note__date">{{ note.dateCreated | date : "MMM dd, yyyy 'at' HH:mm" }}</div>
+      <div class="note__author" *ngIf="author">
+        <div class="note__author-name">{{ author.firstName }} {{ author.lastName }}</div>
+        <div class="note__author-role">{{ author.role }}</div>
+      </div>
     </div>
-
-    <div class="note__date">{{ note.dateCreated | date : "MMM dd, yyyy 'at' HH:mm" }}</div>
   </div>
-
-  <h2 class="note__title">{{ note.title }}</h2>
-  <div class="note__content">{{ note.content }}</div>
+  <div class="note__content" [innerHTML]="note.content"></div>
 
   <img style="width: 200px;" [src]="note.image" alt="image" *ngIf="note.image">
 
-  <button class="note__edit">Edit Note</button>
-  <button class="note__delete" (click)="deleteNote(note.id!)">Delete Note</button>
+  <button class="note__edit" [routerLink]="['/notes/update', note.id!]" *ngIf="isAuthor">Edit Note</button>
+  <button class="note__delete" (click)="deleteNote(note.id!)" *ngIf="isAuthor">Delete Note</button>
   <button class="note__add" (click)="addComment()">Add Comment</button>
 
-  <div class="create" *ngIf="noteCreation">
+  <div class="create" *ngIf="commentCreation">
     <h2 class="create__title">Adding of Comment</h2>
     <form [formGroup]="commentForm" (ngSubmit)="onCommentCreate()">
 
@@ -27,11 +28,13 @@
       </div>
 
       <div class="form-group">
-        <label for="image">Image:</label>
+        <label for="image">Add Image:</label>
         <input type="file" formControlName="image" id="image" class="form-control"/>
       </div>
 
-      <button type="submit" class="btn btn-primary">Create Comment</button>
+      <button type="submit" class="btn-primary">Create Comment</button>
+      <button class="note__edit" (click)="onClose()">Cancel</button>
+
     </form>
   </div>
 

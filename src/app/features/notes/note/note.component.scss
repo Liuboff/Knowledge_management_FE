@@ -1,27 +1,56 @@
+@import '../../../../styles/constants';
+
 .note {
   padding: 20px;
-  border: 1px solid #ccc;
   border-radius: 10px;
-  background-color: #fff;
+  background: rgba($color: $blue400, $alpha: 0.1);
   box-shadow: 0px 0px 10px #ccc;
 
+  &__up{
+    display: flex;
+    justify-content: space-between;
+  }
+  &__header{
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  &__date {
+    font-weight: 12px;
+    color: $lightsand300;
+    text-align: end;
+  }
+  &__author{
+    text-align: right;
+    margin-top: 10px;
+  }
+  &__author-name{
+    font-size: 18px;
+    font-weight: 500;
+  }
+  &__author-role{
+    font-size: 12px;
+    color: $blue400;
+  }
+
   &__title {
-    color: #090090;
+    width:85%;
+    color: $blue900;
     margin-bottom: 15px;
   }
 
   &__content {
-    padding: 20px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
+    padding-top: 20px;
+    border-top: 1px solid #6c6d6f;
+    color: #6c6d6f;
+    font-size: 18px;
   }
 
-  &__date {
-    font-weight: 12px;
-    color: #ccc;
-    text-align: end;
-    margin-bottom: 10px;
+  img{
+    display: flex;
+    margin-bottom: 20px;
   }
 
   button {
@@ -29,11 +58,8 @@
     color: #fff;
     font-size: 14px;
     border-radius: 5px;
-    width: 120px;
-  }
-
-  button:hover {
-    box-shadow: 0px 0px 5px 3px #ccc;
+    font-size: 16px;
+    transition: all 0.5s;
   }
 
   button + button {
@@ -41,10 +67,49 @@
   }
 
   &__edit {
-    background-color: #fa9632;
+    background-color: $blue400;
+  }
+  &__edit:hover{
+    background-color: $blue500;
   }
 
   &__delete {
-    background-color: brown;
+    background-color: $blue500;
+  }
+  &__delete:hover{
+    background-color: $blue900;
+  }
+
+  &__add{
+    background-color: $lightsand100;
+  }
+  &__add:hover{
+    background-color: $lightsand300;
+  }
+
+  h3{
+    margin-top: 50px;
+  }
+}
+
+
+.create{
+  &__title{
+    margin: 30px 0 10px 0;
+  }
+  .form-group{
+    margin-top: 20px;
+  }
+  label{
+    font-size: 18px;
+    font-weight: 400;
+    margin-right: 15px;
+  }
+  .btn-primary{
+    margin-top: 20px;
+    background-color: $lightsand100;
+  }
+  .btn-primary:hover{
+    background-color: $lightsand300;
   }
 }

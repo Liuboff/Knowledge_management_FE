@@ -1,3 +1,5 @@
+@import './../../../styles/constants';
+
 .notes {
   height: 100%;
   padding: 20px;
@@ -5,34 +7,42 @@
   border-radius: 10px;
   background-color: rgba(223, 233, 243, 0.5);
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
-  row-gap: 20px;
+  gap: 30px;
 
   .note {
-    width: 30%;
     padding: 20px;
-    border: 1px solid #ccc;
     border-radius: 10px;
-    background-color: #fff;
+    background: rgba($color: $blue400, $alpha: 0.1);
     box-shadow: 0px 0px 10px #ccc;
+    transition: all 0.5s;
+    overflow: hidden;
+    max-height: 200px;
 
     &__title {
-      color: #090090;
-      margin-bottom: 15px;
+      color: $blue900;
+      font-size: 22px;
     }
 
     &__content {
       padding: 20px;
-      border: 1px solid #ccc;
       border-radius: 10px;
+      color: #6c6d6f;
+      // overflow: hidden;
+      // height: 200px;
     }
 
     &__date {
       font-weight: 12px;
-      color: #ccc;
+      color: $lightsand300;
       text-align: end;
       margin-bottom: 10px;
     }
   }
+  .note:hover{
+    background: rgba($color: $blue400, $alpha: 0.3);
+    cursor: pointer;
+  }
+
 }
+

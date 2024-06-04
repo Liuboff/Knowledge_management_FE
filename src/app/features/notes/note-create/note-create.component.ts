@@ -71,22 +71,20 @@ export class NoteCreateComponent implements OnInit {
 
       noteFormData.append('authorId', this.currentUserId);
 
-      // for (let pair of noteFormData as any) {
-      //   console.log(pair[0] + ': ' + pair[1]);
-      // }
-
       this.notesServise.createNote(noteFormData).subscribe({
         next: () => {
           let proj = this.noteForm.get('project')?.value;
           this.onClose();
-          this.router.navigateByUrl(`notes?projectId=${proj}`);
+          this.router.navigateByUrl(`/notes?projectId=${proj}`);
+          alert('Note was successfully created.');
         },
         error: (error) => {
           this.errorMessage = error.message;
           setTimeout(() => {
             this.onClose();
           }, 2000);
-          this.router.navigateByUrl('');
+          alert('Note was not created.');
+          this.router.navigateByUrl('/notes/create');
         },
       });
 
@@ -108,6 +106,5 @@ export class NoteCreateComponent implements OnInit {
 
   onClose() {
     this.noteForm.reset();
-    this.router.navigateByUrl('');
   }
 }

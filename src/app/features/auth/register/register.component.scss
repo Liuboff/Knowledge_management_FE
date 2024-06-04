@@ -5,7 +5,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $white;
   margin: 0 auto;
   z-index: 1000;
 }
@@ -15,10 +14,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: left;
-  margin-top: 75px;
   background-color: $white;
-  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-  border: 1px solid $grey200;
+  box-shadow: 0 0 7px 0 rgba(0, 0, 0, 25%);
+  border-radius: 10px;
   position: relative;
 
   .form__header {
@@ -31,16 +29,6 @@
       align-items: flex-end;
       text-decoration: none;
       cursor: pointer;
-      width: 288px;
-      height: 46px;
-      background-color: $blue500;
-
-      &-img {
-        display: block;
-        width: 44px;
-        height: 44px;
-        margin-bottom: 2px;
-      }
 
       &-text {
         font-family: Baskerville, sans-serif;
@@ -50,6 +38,10 @@
         text-transform: uppercase;
         color: $white;
       }
+    }
+    .header__logo img{
+      width: 80px;
+      margin: 10px 0 20px 45px;
     }
 
     .header__close {
@@ -177,8 +169,8 @@
   &__close {
     width: 22.5px;
     height: 22.5px;
-    top: 40px;
-    right: 10px;
+    top: 20px;
+    right: 20px;
     position: absolute;
     border-radius: 50%;
     background-color: $grey600;

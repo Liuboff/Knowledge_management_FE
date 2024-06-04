@@ -9,6 +9,8 @@ import { NotesComponent } from './notes.component';
 import { NoteComponent } from './note/note.component'
 import { NoteCreateComponent } from './note-create/note-create.component';
 import { CommentComponent } from './comment/comment.component';
+import { SharedModule } from '@shared/shared.module';
+import { NoteUpdateComponent } from './note-update/note-update.component';
 
 @NgModule({
   declarations: [
@@ -16,12 +18,14 @@ import { CommentComponent } from './comment/comment.component';
     NoteComponent,
     NoteCreateComponent,
     CommentComponent,
+    NoteUpdateComponent,
   ],
   imports: [
     CommonModule,
     NotesRoutingModule,
     ReactiveFormsModule,
-    EditorModule
+    EditorModule,
+    SharedModule
   ]
 })
 export class NotesModule { }

@@ -21,6 +21,7 @@ export class JiraComponent implements OnInit {
   userList: User[] = [];
   issueTypes: string[]= ['Ticket','Defect','RnD Work'];
   status: string[]= ['To Do','In Progress','Done'];
+  storyPoint: number[]= [1, 2, 3, 5, 8, 13, 21, 34, 55, 89];
 
   taskObj: any = {
     'title': '',
@@ -28,7 +29,7 @@ export class JiraComponent implements OnInit {
     'status': 'To Do',
     'type': 'Ticket',
     'taskStatus': '6638ab9fd702ab3e83af0da8',
-    'storyPoint': 0,
+    'storyPoint': 1,
     'image': "",
     'assigneeId': '',
     'reporterId': '',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { map, Observable, switchMap } from 'rxjs';
+import { map, Observable, switchMap, tap } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -30,47 +30,47 @@ export class NoteComponent implements OnInit {
   author!: User;
   isAuthor: boolean = false;
   currentUserId!: string;
-  noteCreation: boolean = false;
+  commentCreation: boolean = false;
   commentForm!: FormGroup;
   errorMessage: string = '';
 
   ngOnInit() {
-    this.auth.getCurrentUser().subscribe((user) => {
-      if (user?.id) this.currentUserId = user.id;
-    });
-
-    this.route.paramMap
-      .pipe(map((params: ParamMap) => params.get('id')!)).subscribe((id) => {
+    this.auth.getCurrentUser().pipe(
+      tap((user) => {
+        if (user?.id) {
+          this.currentUserId = user.id;
+        }
+      }),
+      switchMap(() => this.route.paramMap),
+      map((params: ParamMap) => params.get('id')!),
+      switchMap((id) => {
         this.noteId = id;
-
-        this.notesService.getNoteById(this.noteId).subscribe((note) => {
-          this.note = note;
-
-          if (this.currentUserId === this.note.authorId) {
-            this.isAuthor = true;
-          }
-
-          this.auth.getUserInfo(this.note?.authorId!)
-            .subscribe((author) => (this.author = author));
-        });
-      }
-    );
-
-    this.comments$ = this.notesService.getComments(this.noteId);
+        return this.notesService.getNoteById(this.noteId);
+      }),
+      tap((note) => {
+        this.note = note;
+        if (this.currentUserId === this.note.authorId) {
+          this.isAuthor = true;
+        }
+      }),
+      switchMap((note) => this.auth.getUserInfo(note?.authorId!))
+    ).subscribe((author) => {
+      this.author = author;
+    });
   }
 
   deleteNote(noteId: string) {
     this.notesService.deleteNote(noteId).subscribe();
-    this.router.navigateByUrl('/notes');
+    this.router.navigateByUrl(`/projects`);
   }
 
   onClose() {
     this.commentForm.reset();
-    this.noteCreation = false;
+    this.commentCreation = false;
   }
 
   addComment() {
-    this.noteCreation = true;
+    this.commentCreation = true;
 
     this.commentForm = this.formBuilder.group({
       content: [''],
@@ -88,12 +88,14 @@ export class NoteComponent implements OnInit {
         next: () => {
           this.onClose();
           this.comments$ = this.notesService.getComments(this.noteId);
+          alert('Comment was successfully created.');
         },
         error: (error) => {
           this.errorMessage = error.message;
           setTimeout(() => {
             this.onClose();
           }, 2000);
+          alert('Comment was not created.');
         },
       });
     }
@@ -101,11 +103,10 @@ export class NoteComponent implements OnInit {
 
   onDeleteComment(commentId: string) {
     this.notesServise.deleteComment(commentId).subscribe();
+    alert('Comment was successfully deleted.');
 
-    this.comments$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) =>
-        this.notesService.getComments(this.noteId)
-      )
-    );
+    this.notesService.getComments(this.noteId)
+
+    this.router.navigateByUrl(`/projects`);
   }
 }

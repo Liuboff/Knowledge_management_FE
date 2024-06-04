@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
           setTimeout(() => {
             this.onClose();
           }, 2000);
-          alert('You don\'t login.');
+          alert('You couldn\'t login.');
           this.router.navigateByUrl('auth/register');
         },
       });

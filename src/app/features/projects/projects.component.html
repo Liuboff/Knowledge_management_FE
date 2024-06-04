@@ -1,16 +1,14 @@
 <div class="projects">
   <h1 class="projects__title">Your Available Projects</h1>
   <div class="projects__items">
-
     <div class="projects__preview" *ngFor="let project of projects" [routerLink]="['/projects', project.id]">
       <div class="project">
         <h2 class="project__title">{{project.name}}</h2>
         <p class="project__info">
           Our purpose is to develop information system for Knowledge management in IT projects
         </p>
-        <div class="project__date">{{12.03.2024 | date}} - {{20.05.2024 | date}}</div>
+        <div class="project__date">{{ project.dateStart | date:'dd.MM.yyyy' }} - {{ project.dateEnd | date:'dd.MM.yyyy' }}</div>
       </div>
     </div>
-    
   </div>
 </div>

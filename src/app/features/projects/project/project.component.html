@@ -1,68 +1,53 @@
 <div class="project">
   <h2 class="project__title">{{project.name}}</h2>
   <p class="project__info">
-    Our purpose is to develop information system for Knowledge management in IT projects
+    The Knowledge Management Information System (KMIS) is a comprehensive software solution designed to facilitate the effective management and dissemination of knowledge within an organization. The system aims to streamline the processes of capturing, storing, sharing, and utilizing knowledge to enhance organizational learning, decision-making, and innovation.
   </p>
-  <div class="project__date">{{12.03.2024 | date}} - {{20.05.2024 | date}}</div>
-
+  <div class="project__date">
+    <span class="project__date-title">Project duration: </span>
+    {{project.dateStart| date:'dd.MM.yyyy'}} - {{project.dateEnd| date:'dd.MM.yyyy'}}
+  </div>
   <div class="project__objective">
     <h3 class="objective__title">Objective</h3>
-    <p class="objective__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis quia aspernatur illum rerum laborum corrupti, impedit at, delectus modi accusamus placeat ex mollitia, maiores consequuntur quod quo? Non, explicabo at.</p>
+    <p class="objective__description">
+      Create a unified platform for storing and managing various types of knowledge assets, including documents, manuals, guidelines, and best practices.
+      Ensure that knowledge is easily accessible to all authorized users, irrespective of their location or device.
+      Implement advanced search and retrieval mechanisms to quickly locate relevant information.
+    </p>
   </div>
 
-  <div class="project__team team">
-    <h3 class="team__title">Team members</h3>
-    <div class="team__owner">Project owner: "hjjk jlkjlk (as link)"</div>
-    <div class="team__members">
-      <div class="team__member" *ngFor="let member of project.team">
-        <div class="team__member-name">{{ 'member.firstName' }} {{ 'member.lastName' }}</div>
-        <div class="team__member-role">{{ 'member.role' }}</div>
-        <a class="team__member-email">{{ 'посилання на імейл' }}</a>
+  <div class="project__items">
+    <div class="project__team team">
+      <h3 class="team__title" routerLink="/people"><span class="notes__team">&#9786;</span>Team members</h3>
+      <div class="team__members">
+        <div class="team__member">{{ "Project owner: " }}
+          <a href="mailto:rob_zack@gmail.com" type="email" class="team__member-link">{{ "Robert" }} {{ "Zack" }}</a>
+        </div>
+
+        <div class="team__member">{{ "FE developer: " }}
+          <a href="mailto:kirlyubov@gmail.com" type="email" class="team__member-link">{{ "Liubov" }} {{ "Zatsepina" }}</a>
+        </div>
+
+        <div class="team__member">{{ "BE developer: " }}
+          <a href="mailto:d-paper@gmail.com" type="email" class="team__member-link">{{ "Dmytro" }} {{ "Paper" }}</a>
+        </div>
+          <!-- <div class="team__member" *ngFor="let member of project.team">
+            {{ member.role }}
+            <a href="{{member.email}}" type="email" class="team__member-link">
+              {{ member.firstName }} {{ member.lastName }}
+            </a>
+          </div> -->
       </div>
-<!--
-      <div class="team__member">
-        <div class="team__member-name">{{ 'member.firstName' }} {{ 'member.lastName' }}</div>
-        <div class="team__member-role">{{ 'member.role' }}</div>
-        <a class="team__member-email">{{ 'посилання на імейл' }}</a>
-      </div>
-
-      <div class="team__member">
-        <div class="team__member-name">{{ 'member.firstName' }} {{ 'member.lastName' }}</div>
-        <div class="team__member-role">{{ 'member.role' }}</div>
-        <a class="team__member-email">{{ 'посилання на імейл' }}</a>
-      </div> -->
+    </div>
+    <div class="project__jira jira">
+      <h3 class="jira__title"><span class="notes__icon">&#10003;</span>Our Tasks on Jira</h3>
+      <a routerLink="/jira" class="jira__link">Link to Jira</a>
+    </div>
+    <div class="project__notes notes">
+      <h3 class="notes__title"><span class="notes__icon">&#10003;</span>Project notes</h3>
+      <a [routerLink]="['/notes/create']" class="notes__link">+ Create new</a>
+      <a [routerLink]="['/notes']" [queryParams]="{ 'projectId': projectId}" class="notes__link">Go to Notes</a>
     </div>
   </div>
-
-  <div class="project__notes notes">
-    <h3 class="notes__title">Project notes</h3>
-    <a [routerLink]="['/notes']" [queryParams]="{ 'projectId': projectId}" class="notes__link">Go to Notes</a>
-  </div>
-
-  <div class="project__jira jira">
-    <h3 class="jira__title">Our Tasks on Jira</h3>
-    <a routerLink="/jira" class="jira__link">Link to Jira</a>
-  </div>
-
-  <!-- <div class="project__brainstorming brain">
-    <h2 class="brain__title">Brainstorming</h2>
-    <div class="brain__facilitator">
-      <h3 class="brain__facilitator-title">Facilitator</h3>
-      <p class="brain__facilitator-name">John Doe '(посилання на імейл)'</p>
-    </div>
-    <div class="brain__facilitator">
-      <h3 class="brain__facilitator-title">Participants</h3>
-      <p class="brain__facilitator-name">John Doe '(посилання на імейл)'</p>
-      <p class="brain__facilitator-name">John Doe '(посилання на імейл)'</p>
-      <p class="brain__facilitator-name">John Doe '(посилання на імейл)'</p>
-      <p class="brain__facilitator-name">John Doe '(посилання на імейл)'</p>
-      <p class="brain__facilitator-name">John Doe '(посилання на імейл)'</p>
-      <p class="brain__facilitator-name">John Doe '(посилання на імейл)'</p>
-    </div>
-    <div class="brain__videolink">
-      <h3 class="brain__videolink-title">Video conference link</h3>
-      <a href="#" class="brain__videolink-link">www.zoom.us/</a>
-    </div>
-  </div> -->
-
 </div>
+

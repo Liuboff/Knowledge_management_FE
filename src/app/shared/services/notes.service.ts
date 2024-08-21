@@ -11,9 +11,10 @@ import { Comment } from '@shared/models/comment.model';
 })
 export class NotesService {
   constructor(private http: HttpClient) {}
+  api: string = `http://localhost:3000/api/v1`;
 
   createNote(note: FormData): Observable<Note> {
-    return this.http.post<Note>(`http://localhost:3000/api/v1/notes/`, note).pipe(
+    return this.http.post<Note>(`${this.api}/notes/`, note).pipe(
       map((response: Note) => {
         console.log(response);
         return response;
@@ -23,7 +24,7 @@ export class NotesService {
   }
 
   updateNote(noteId: string, note: FormData): Observable<Note> {
-    return this.http.put<Note>(`http://localhost:3000/api/v1/notes/${noteId}`, note).pipe(
+    return this.http.put<Note>(`${this.api}/notes/${noteId}`, note).pipe(
       map((response: Note) => {
         console.log('updateNote-', response);
         return response;
@@ -33,7 +34,7 @@ export class NotesService {
   }
 
   getNotes(): Observable<Note[]> {
-    return this.http.get<Note[]>(`http://localhost:3000/api/v1/notes/`).pipe(
+    return this.http.get<Note[]>(`${this.api}/notes/`).pipe(
       map((response: Note[]) => {
         return response;
       }),
@@ -42,7 +43,7 @@ export class NotesService {
   }
 
   getUserNotes(userId: string): Observable<Note[]> {
-    return this.http.get<Note[]>(`http://localhost:3000/api/v1/notes/notesByUser/${userId}`).pipe(
+    return this.http.get<Note[]>(`${this.api}/notes/notesByUser/${userId}`).pipe(
       map((response: Note[]) => {
         return response;
       }),
@@ -51,7 +52,7 @@ export class NotesService {
   }
 
   getProjectNotes(projectId: string): Observable<Note[]> {
-    return this.http.get<Note[]>(`http://localhost:3000/api/v1/notes/notesByProject/${projectId}`).pipe(
+    return this.http.get<Note[]>(`${this.api}/notes/notesByProject/${projectId}`).pipe(
       map((response: Note[]) => {
         return response;
       }),
@@ -60,13 +61,13 @@ export class NotesService {
   }
 
   getNoteById(id: string): Observable<Note> {
-    return this.http.get<Note>(`http://localhost:3000/api/v1/notes/${id}`).pipe(
+    return this.http.get<Note>(`${this.api}/notes/${id}`).pipe(
       catchError(this.handleError),
     );
   }
 
   deleteNote(notetId: string) {
-    return this.http.delete<{success: boolean, message: string}>(`http://localhost:3000/api/v1/notes/${notetId}`).pipe(
+    return this.http.delete<{success: boolean, message: string}>(`${this.api}/notes/${notetId}`).pipe(
       map((response) => {
         return response;
       }),
@@ -75,7 +76,7 @@ export class NotesService {
   }
 
   getCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>(`http://localhost:3000/api/v1/categories/`).pipe(
+    return this.http.get<Category[]>(`${this.api}/categories/`).pipe(
       map((response: Category[]) => {
         return response;
       }),
@@ -84,7 +85,7 @@ export class NotesService {
   }
 
   getComments(noteId: string) {
-    return this.http.get<Comment[]>(`http://localhost:3000/api/v1/notes/comments/${noteId}`).pipe(
+    return this.http.get<Comment[]>(`${this.api}/notes/comments/${noteId}`).pipe(
       map((response: Comment[]) => {
         return response;
       }),
@@ -93,7 +94,7 @@ export class NotesService {
   }
 
   createComment(comment: Comment): Observable<Comment> {
-    return this.http.post<Comment>(`http://localhost:3000/api/v1/notes/commentCreate`, comment).pipe(
+    return this.http.post<Comment>(`${this.api}/notes/commentCreate`, comment).pipe(
       map((response: Comment) => {
         return response;
       }),
@@ -102,7 +103,7 @@ export class NotesService {
   }
 
   deleteComment(commentId: string) {
-    return this.http.delete<{success: boolean, message: string}>(`http://localhost:3000/api/v1/notes/comments/${commentId}`).pipe(
+    return this.http.delete<{success: boolean, message: string}>(`${this.api}/notes/comments/${commentId}`).pipe(
       map((response) => {
         return response;
       }),

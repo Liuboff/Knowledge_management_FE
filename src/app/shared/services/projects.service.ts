@@ -11,9 +11,10 @@ import { Task } from '@shared/models/task.model';
 export class ProjectsService {
 
   constructor(private http: HttpClient) {}
+  api: string = `http://localhost:3000/api/v1`;
 
   getUserProjects(userId: string): Observable<Project[]> {
-    return this.http.get<Project[]>(`http://localhost:3000/api/v1/projects/userProjectsByUserId/${userId}`).pipe(
+    return this.http.get<Project[]>(`${this.api}/projects/userProjectsByUserId/${userId}`).pipe(
       map((response: Project[]) => {
         return response;
       }),
@@ -23,7 +24,7 @@ export class ProjectsService {
   }
 
   getProjectTeam(projectId: string): Observable<User[]> {
-    return this.http.get<User[]>(`http://localhost:3000/api/v1/projects/teamByprojectId/${projectId}`).pipe(
+    return this.http.get<User[]>(`${this.api}/projects/teamByprojectId/${projectId}`).pipe(
       map((response: User[]) => {
         return response;
       }),
@@ -33,7 +34,7 @@ export class ProjectsService {
   }
 
   getProjectTasks(projectId: string): Observable<Task[]> {
-    return this.http.get<Task[]>(`http://localhost:3000/api/v1/projects/tasksByProjectId/${projectId}`).pipe(
+    return this.http.get<Task[]>(`${this.api}/projects/tasksByProjectId/${projectId}`).pipe(
       map((response: Task[]) => {
         return response;
       }),
@@ -43,7 +44,7 @@ export class ProjectsService {
   }
 
   getProjectById(projectId: string): Observable<Project> {
-    return this.http.get<Project>(`http://localhost:3000/api/v1/projects/${projectId}`).pipe(
+    return this.http.get<Project>(`${this.api}/projects/${projectId}`).pipe(
       map((response: Project) => {
         return response;
       }),
@@ -53,7 +54,7 @@ export class ProjectsService {
   }
 
   getTaskById(taskId: string): Observable<Task> {
-    return this.http.get<Task>(`http://localhost:3000/api/v1/tasks/${taskId}`).pipe(
+    return this.http.get<Task>(`${this.api}/tasks/${taskId}`).pipe(
       map((response: Task) => {
         return response;
       }),
@@ -62,7 +63,7 @@ export class ProjectsService {
   }
 
   createTask(task: Task): Observable<Task> {
-    return this.http.post<Task>(`http://localhost:3000/api/v1/tasks`, task).pipe(
+    return this.http.post<Task>(`${this.api}/tasks`, task).pipe(
       map((response: Task) => {
         return response;
       }),

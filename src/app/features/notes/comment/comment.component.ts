@@ -24,16 +24,15 @@ export class CommentComponent implements OnInit {
       if (user?.id) this.currentUserId = user.id;
     });
 
-    if (this.currentUserId === this.comment.authorId) {
+    if (this.comment && this.comment.authorId && this.currentUserId === this.comment.authorId) {
       this.isAuthor = true;
     }
 
-    if (this.comment.authorId) {
+    if (this.comment && this.comment.authorId) {
       this.authService.getUserInfo(this.comment.authorId).subscribe(author => {
         this.author = author;
       });
     }
-
   }
 
   onDeleteComment(idComment: string) {

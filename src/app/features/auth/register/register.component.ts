@@ -168,12 +168,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
         ? this.authService.updateUser(userData)
         : this.authService.registerUser(userData);
 
-      request
-        .pipe(
-          // takeUntil(this.destroy$),
-          // switchMap(() => this.authService.getUserProfile())
-        )
-        .subscribe({
+      request.pipe().subscribe({
           next: () => this.handleSuccess(),
           error: (error) => this.handleError(error),
         });

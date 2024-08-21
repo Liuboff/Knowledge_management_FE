@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '@shared/services/auth.service'
-// import { ModalService } from '@shared/modal/modal.service';
 
 @Component({
   selector: 'app-login',

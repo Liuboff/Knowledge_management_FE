@@ -1,16 +1,14 @@
-<div class="comment">
-
+<div class="comment" *ngIf="comment">
   <div class="comment__author" *ngIf="author">
     <div class="coment__author_first">
       <div class="comment__author-name">{{ author.firstName }} {{ author.lastName }}</div>
       <div class="comment__author-role">{{ author.role }}</div>
     </div>
-      <div class="comment__dateCreated">{{ comment.dateCreated | date : "MMM dd, yyyy 'at' HH:mm" }}</div>    
+    <div class="comment__dateCreated">{{ comment.dateCreated | date : "MMM dd, yyyy 'at' HH:mm" }}</div>
   </div>
-
- <div class="comment__contents">
+  <div class="comment__contents">
     <div class="comment__content" [innerHTML]="comment.content"></div>
     <button class="comment__delete" *ngIf="isAuthor" (click)="onDeleteComment(comment.id!)">Delete</button>
- </div>
+  </div>
   <div class="comment__image"><img src="{{ comment.image }}" /></div>
 </div>

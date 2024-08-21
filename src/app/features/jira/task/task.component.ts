@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { map, Observable } from 'rxjs';
+
 import { Task } from '@shared/models/task.model';
 import { User } from '@shared/models/user.model';
 import { AuthService } from '@shared/services/auth.service';
 import { ProjectsService } from '@shared/services/projects.service';
-import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-task',

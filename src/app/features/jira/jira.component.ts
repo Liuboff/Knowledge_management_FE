@@ -11,7 +11,7 @@ import { Task } from '@shared/models/task.model';
 @Component({
   selector: 'app-jira',
   templateUrl: './jira.component.html',
-  styleUrl: './jira.component.scss'
+  styleUrls: ['./jira.component.scss']
 })
 export class JiraComponent implements OnInit {
   currentUserId: string = '';

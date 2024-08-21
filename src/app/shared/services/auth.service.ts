@@ -11,6 +11,7 @@ import { User } from '@shared/models/user.model';
 export class AuthService {
   private currentUserSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
   clearLogoutTimeout: any;
+  api: string = `http://localhost:3000/api/v1`;
 
   constructor(private http: HttpClient) {
     if (this.isValidToken()) {
@@ -29,7 +30,7 @@ export class AuthService {
   }
 
   registerUser(user: User): Observable<User> {
-    return this.http.post<User>(`http://localhost:3000/api/v1/users/register`, user).pipe(
+    return this.http.post<User>(`${this.api}/users/register`, user).pipe(
       map((response: User) => {
         if (response.token) {
           localStorage.setItem('token', response.token);
@@ -43,7 +44,7 @@ export class AuthService {
 
   login(email: string, password: string): Observable<User> {
     let userData = { email, password };
-    return this.http.post<{ user: User, token: string }>('http://localhost:3000/api/v1/users/login', userData).pipe(
+    return this.http.post<{ user: User, token: string }>(`${this.api}/users/login`, userData).pipe(
       map((response) => {
         if (response.token) {
           localStorage.setItem('user', JSON.stringify(response.user));
@@ -60,13 +61,13 @@ export class AuthService {
   }
 
   getUserInfo(userId: string): Observable<User> {
-    return this.http.get<User>(`http://localhost:3000/api/v1/users/${userId}`).pipe(
+    return this.http.get<User>(`${this.api}/users/${userId}`).pipe(
       catchError(this.handleError),
     );
   }
 
   updateUser(user: User): Observable<User> {
-    return this.http.put<User>(`http://localhost:3000/api/v1/users/${user.id}`, user).pipe(
+    return this.http.put<User>(`${this.api}/users/${user.id}`, user).pipe(
       map((response: User) => {
         if (response.token) {
           localStorage.setItem('token', response.token);
@@ -104,7 +105,7 @@ export class AuthService {
   }
 
   getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`http://localhost:3000/api/v1/users`).pipe(
+    return this.http.get<User[]>(`${this.api}/users`).pipe(
       catchError(this.handleError),
     );
   }
@@ -155,5 +156,4 @@ export class AuthService {
     console.error(errorMessage);
     return throwError(() => new Error(errorMessage));
   }
-
 }

@@ -1,7 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { User } from '@shared/models/user.model';
 import { AuthService } from '@shared/services/auth.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',

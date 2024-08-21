@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-// import { filter } from 'rxjs/operators';
 
 import { NotesService } from '@shared/services/notes.service';
 import { Note } from '@shared/models/note.model';
